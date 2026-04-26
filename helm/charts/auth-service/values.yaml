@@ -1,0 +1,12 @@
+image: { repository: matchday/auth-service, tag: "" }
+replicaCount: 3
+service: { type: ClusterIP, port: 50010, targetPort: 50010 }
+resources: { requests: { cpu: 100m, memory: 128Mi }, limits: { cpu: 1000m, memory: 512Mi } }
+probes: { liveness: { httpGet: { path: /healthz, port: 50010 } }, readiness: { httpGet: { path: /healthz, port: 50010 } } }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: auth-service, app.kubernetes.io/part-of: matchday, matchday.io/domain: identity }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config: { LOG_LEVEL: info, KEYCLOAK_URL: "http://keycloak.identity:8080" }
+envFrom: []
+cloud: {}

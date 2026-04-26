@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.common.events",
+  "name": "MatchRef",
+  "fields": [
+    { "name": "match_id",       "type": "string" },
+    { "name": "competition_id", "type": "string" },
+    { "name": "season_id",      "type": "string" }
+  ]
+}

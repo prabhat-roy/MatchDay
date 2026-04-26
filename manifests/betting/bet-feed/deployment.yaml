@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bet-feed
+  namespace: matchday-betting
+  labels:
+    app.kubernetes.io/name: bet-feed
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: betting
+    matchday.io/regulated: "true"
+spec:
+  replicas: 3
+  selector: { matchLabels: { app.kubernetes.io/name: bet-feed } }
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bet-feed
+        matchday.io/domain: betting
+        matchday.io/regulated: "true"
+    spec:
+      serviceAccountName: bet-feed
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: bet-feed
+          image: harbor.matchday.internal/matchday/bet-feed:latest
+          ports: [{ containerPort: 50241, name: http }]
+          env:
+            - { name: RESPONSIBLE_GAMBLING_URL, value: "http://localhost:50242" }
+            - { name: KAFKA_BOOTSTRAP,          value: matchday-kafka-bootstrap.kafka:9092 }
+          livenessProbe:  { httpGet: { path: /healthz, port: 50241 } }
+          readinessProbe: { httpGet: { path: /healthz, port: 50241 } }
+          resources:
+            requests: { cpu: 200m, memory: 256Mi }
+            limits:   { cpu: 2000m, memory: 1Gi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
+        # Mandatory responsible-gambling sidecar — bypassing it is forbidden.
+        - name: responsible-gambling
+          image: harbor.matchday.internal/matchday/responsible-gambling-sidecar:latest
+          ports: [{ containerPort: 50242, name: rg }]
+          env:
+            - { name: MODE, value: sidecar-enforce }
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits:   { cpu: 200m, memory: 256Mi }

@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Release.Name }}-bet-feed
+  {{- with .Values.serviceAccount.annotations }}
+  annotations: {{- toYaml . | nindent 4 }}
+  {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata: { name: {{ .Release.Name }}-bet-feed }
+spec:
+  type: {{ .Values.service.type }}
+  ports: [{ port: {{ .Values.service.port }}, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: bet-feed, app.kubernetes.io/instance: {{ .Release.Name }} }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-bet-feed
+  labels: { app.kubernetes.io/name: bet-feed, app.kubernetes.io/part-of: matchday, matchday.io/domain: betting, matchday.io/regulated: "true" }
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: { matchLabels: { app.kubernetes.io/name: bet-feed, app.kubernetes.io/instance: {{ .Release.Name }} } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: bet-feed, app.kubernetes.io/instance: {{ .Release.Name }}, matchday.io/domain: betting, matchday.io/regulated: "true" } }
+    spec:
+      serviceAccountName: {{ .Release.Name }}-bet-feed
+      securityContext: {{- toYaml .Values.securityContext | nindent 8 }}
+      containers:
+        - name: bet-feed
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          ports: [{ name: http, containerPort: {{ .Values.service.targetPort }} }]
+          env:
+            - { name: PORT, value: "{{ .Values.service.targetPort }}" }
+            {{- range $k, $v := .Values.config }}
+            - { name: {{ $k }}, value: "{{ $v }}" }
+            {{- end }}
+          livenessProbe:  {{- toYaml .Values.probes.liveness  | nindent 12 }}
+          readinessProbe: {{- toYaml .Values.probes.readiness | nindent 12 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+        {{- if .Values.sidecar.enabled }}
+        - name: responsible-gambling
+          image: {{ .Values.sidecar.image }}
+          ports: [{ name: rg, containerPort: {{ .Values.sidecar.port }} }]
+          env:
+            - { name: PORT, value: "{{ .Values.sidecar.port }}" }
+            - { name: MODE, value: "sidecar-enforce" }
+          resources: { requests: { cpu: 50m, memory: 64Mi }, limits: { cpu: 200m, memory: 256Mi } }
+        {{- end }}

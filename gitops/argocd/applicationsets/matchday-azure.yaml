@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: matchday-azure
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/prabhat-roy/MatchDay.git
+        revision: HEAD
+        directories:
+          - path: helm/charts/*
+  template:
+    metadata: { name: '{{path.basename}}-azure', labels: { cloud: azure, matchday.io/managed-by: argocd } }
+    spec:
+      project: matchday
+      source:
+        repoURL: https://github.com/prabhat-roy/MatchDay.git
+        targetRevision: HEAD
+        path: '{{path}}'
+        helm:
+          valueFiles: [values.yaml, values-azure.yaml]
+      destination: { server: https://kubernetes.default.svc, namespace: matchday }
+      syncPolicy:
+        automated: { prune: true, selfHeal: true }
+        syncOptions: [CreateNamespace=true, ServerSideApply=true]

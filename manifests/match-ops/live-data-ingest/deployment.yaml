@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: live-data-ingest
+  namespace: matchday-match-ops
+  labels:
+    app.kubernetes.io/name: live-data-ingest
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: match-ops
+    matchday.io/marquee-critical: "true"
+spec:
+  replicas: 6
+  selector: { matchLabels: { app.kubernetes.io/name: live-data-ingest } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: live-data-ingest, matchday.io/domain: match-ops }
+      annotations: { prometheus.io/scrape: "true", prometheus.io/port: "50143" }
+    spec:
+      serviceAccountName: live-data-ingest
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: live-data-ingest
+          image: harbor.matchday.internal/matchday/live-data-ingest:latest
+          ports: [{ containerPort: 50143, name: http }]
+          env:
+            - { name: KAFKA_BOOTSTRAP, value: matchday-kafka-bootstrap.kafka:9092 }
+            - { name: NATS_URL,        value: nats://matchday-nats.messaging:4222 }
+            - { name: KAFKA_TOPIC,     value: match-ops.event.recorded }
+            - { name: NATS_STREAM,     value: live-events }
+          livenessProbe:  { httpGet: { path: /healthz, port: 50143 }, initialDelaySeconds: 5,  periodSeconds: 5 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50143 }, initialDelaySeconds: 2,  periodSeconds: 3 }
+          resources:
+            requests: { cpu: 500m,  memory: 512Mi }
+            limits:   { cpu: 4000m, memory: 2Gi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

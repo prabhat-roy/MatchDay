@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.sponsorship.events",
+  "name": "ActivationDelivered",
+  "fields": [
+    { "name": "event_id",        "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",   "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id",  "type": "string" },
+    { "name": "activation_id",   "type": "string" },
+    { "name": "sponsor_id",      "type": "string" },
+    { "name": "match",           "type": "com.matchday.common.events.MatchRef" },
+    { "name": "surface",         "type": "string" },
+    { "name": "delivered_units", "type": "int" }
+  ]
+}

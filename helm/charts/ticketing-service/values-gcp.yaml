@@ -1,0 +1,2 @@
+cloud: { provider: gcp }
+serviceAccount: { annotations: { iam.gke.io/gcp-service-account: matchday-ticketing-service@{{ .Values.gcp.project }}.iam.gserviceaccount.com } }

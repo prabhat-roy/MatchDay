@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.academy.events",
+  "name": "TalentIdentified",
+  "doc": "academy.talent.identified — minor data; consumers must enforce COPPA parental consent.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "athlete",        "type": "com.matchday.common.events.AthleteIdRef" },
+    { "name": "minor",          "type": "boolean", "default": true },
+    { "name": "rating",         "type": "double" },
+    { "name": "scout_id",       "type": "string" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.performance.events",
+  "name": "GpsSample",
+  "doc": "FIFA EPTS GPS sample at 25Hz. Lands in TimescaleDB hypertable partitioned by match_id.",
+  "fields": [
+    { "name": "event_id",      "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms", "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "match",         "type": "com.matchday.common.events.MatchRef" },
+    { "name": "athlete",       "type": "com.matchday.common.events.AthleteIdRef" },
+    { "name": "x_m",           "type": "double" },
+    { "name": "y_m",           "type": "double" },
+    { "name": "speed_ms",      "type": "double" },
+    { "name": "accel_ms2",     "type": "double" },
+    { "name": "heart_rate_bpm","type": ["null","int"], "default": null }
+  ]
+}

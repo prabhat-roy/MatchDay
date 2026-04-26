@@ -1,0 +1,25 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata: { name: anti-doping-namespace-guard }
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: anti-doping-only-medicine-images
+      match:
+        any: [{ resources: { kinds: [Pod], namespaces: [matchday-anti-doping] } }]
+      validate:
+        message: "matchday-anti-doping accepts only matchday/anti-doping-* images"
+        pattern:
+          spec:
+            containers:
+              - image: "harbor.matchday.internal/matchday/anti-doping-*"
+    - name: forbid-non-siloed-mounts
+      match:
+        any: [{ resources: { kinds: [Pod], namespaces: [matchday-anti-doping] } }]
+      validate:
+        message: "anti-doping pods may not mount secrets from outside the silo"
+        pattern:
+          spec:
+            volumes:
+              - secret:
+                  secretName: "matchday-anti-doping-*"

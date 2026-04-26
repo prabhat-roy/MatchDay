@@ -1,0 +1,23 @@
+# live-data-ingest is on the marquee critical path; sized for 10x surge.
+image: { repository: matchday/live-data-ingest, tag: "" }
+replicaCount: 6
+service: { type: ClusterIP, port: 50143, targetPort: 50143 }
+resources:
+  requests: { cpu: 500m,  memory: 512Mi }
+  limits:   { cpu: 4000m, memory: 2Gi }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50143 }, initialDelaySeconds: 5, periodSeconds: 5 }
+  readiness: { httpGet: { path: /healthz, port: 50143 }, initialDelaySeconds: 2, periodSeconds: 3 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: live-data-ingest, app.kubernetes.io/part-of: matchday, matchday.io/domain: match-ops, matchday.io/marquee-critical: "true" }
+podAnnotations: { prometheus.io/scrape: "true", prometheus.io/port: "50143" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  KAFKA_BOOTSTRAP: "matchday-kafka-bootstrap.kafka:9092"
+  NATS_URL: "nats://matchday-nats.messaging:4222"
+  KAFKA_TOPIC: "match-ops.event.recorded"
+  NATS_STREAM: "live-events"
+envFrom: []
+cloud: {}

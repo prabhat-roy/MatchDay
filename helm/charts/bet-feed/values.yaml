@@ -1,0 +1,23 @@
+# bet-feed runs with a responsible-gambling sidecar; bypassing the
+# sidecar is forbidden by Cilium policy and Istio auth policy.
+image: { repository: matchday/bet-feed, tag: "" }
+replicaCount: 3
+service: { type: ClusterIP, port: 50241, targetPort: 50241 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 2000m, memory: 1Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50241 } }
+  readiness: { httpGet: { path: /healthz, port: 50241 } }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: bet-feed, app.kubernetes.io/part-of: matchday, matchday.io/domain: betting, matchday.io/regulated: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  RESPONSIBLE_GAMBLING_URL: "http://localhost:50242"
+  KAFKA_BOOTSTRAP: "matchday-kafka-bootstrap.kafka:9092"
+sidecar:
+  enabled: true
+  image: matchday/responsible-gambling-sidecar:0.1.0
+  port: 50242
+envFrom: []
+cloud: {}

@@ -1,0 +1,26 @@
+image: { repository: matchday/scoring-engine, tag: "" }
+replicaCount: 4
+service: { type: ClusterIP, port: 50221, targetPort: 50221 }
+resources:
+  requests: { cpu: 500m,  memory: 1Gi }
+  limits:   { cpu: 4000m, memory: 4Gi }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50221 }, initialDelaySeconds: 60 }
+  readiness: { httpGet: { path: /healthz, port: 50221 }, initialDelaySeconds: 30 }
+serviceAccount: { create: true, annotations: {} }
+podLabels:
+  app.kubernetes.io/name: scoring-engine
+  app.kubernetes.io/part-of: matchday
+  matchday.io/domain: fantasy
+  matchday.io/deterministic: "true"
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  KAFKA_BOOTSTRAP: "matchday-kafka-bootstrap.kafka:9092"
+  INPUT_TOPIC: "match-ops.event.recorded"
+  OUTPUT_TOPIC: "fantasy.score.updated"
+  REDIS_URL: "redis://matchday-redis.databases:6379"
+  JAVA_OPTS: "-XX:+UseG1GC -Xms1g -Xmx3g"
+envFrom: []
+cloud: {}

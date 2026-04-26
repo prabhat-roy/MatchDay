@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata: { name: live-data-ingest, namespace: matchday-match-ops }
+spec:
+  type: ClusterIP
+  ports: [{ port: 50143, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: live-data-ingest }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: live-data-ingest, namespace: matchday-match-ops }

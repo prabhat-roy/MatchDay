@@ -1,0 +1,12 @@
+syntax = "proto3";
+package matchday.betting.v1;
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.betting.v1";
+option java_multiple_files = true;
+
+// bet-feed: inbound bets — MUST evaluate ResponsibleGamblingContext server-side.
+// Never bypass limit / self-exclusion checks.
+service BetFeedService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

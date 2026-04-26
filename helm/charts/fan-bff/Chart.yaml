@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fan-bff
+description: Fan-portal BFF aggregating fixtures, scores, fantasy
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

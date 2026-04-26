@@ -1,0 +1,17 @@
+image: { repository: matchday/drops-service, tag: "" }
+replicaCount: 5
+service: { type: ClusterIP, port: 50281, targetPort: 50281 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 4000m, memory: 2Gi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50281 } }
+  readiness: { httpGet: { path: /healthz, port: 50281 } }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: drops-service, app.kubernetes.io/part-of: matchday, matchday.io/domain: merchandise, matchday.io/marquee-critical: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  REDIS_URL: "redis://matchday-redis.databases:6379"
+  QUEUE_TOPIC: "merchandise.drop.released"
+envFrom: []
+cloud: {}

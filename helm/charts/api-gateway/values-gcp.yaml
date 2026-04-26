@@ -1,0 +1,6 @@
+cloud: { provider: gcp, storageClass: pd-ssd, ingressClass: gce }
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: matchday-api-gateway@{{ .Values.gcp.project }}.iam.gserviceaccount.com
+envFrom:
+  - secretRef: { name: api-gateway-gcp-secrets }

@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package matchday.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.matchday.common.v1";
+option java_multiple_files = true;
+
+// AthleteId — tokenised athlete identifier; raw biometric/medical lookups
+// require Vault access and are siloed from non-medical services.
+message AthleteId {
+  string token = 1;
+}
+
+// FanId — tokenised fan identifier (loyalty / fantasy / betting).
+message FanId {
+  string token = 1;
+}
+
+// MatchRef — canonical match identifier.
+message MatchRef {
+  string match_id = 1;
+  string competition_id = 2;
+  string season_id = 3;
+}
+
+// EventTime — provider-stamped event time + arrival time (live data
+// services MUST handle out-of-order events using event_time, never arrival).
+message EventTime {
+  google.protobuf.Timestamp event_time   = 1;
+  google.protobuf.Timestamp arrived_at   = 2;
+}
+
+// GeoPoint — WGS84.
+message GeoPoint {
+  double lat = 1;
+  double lng = 2;
+}
+
+// Money — fixed-point monetary amount, ISO 4217 currency, minor units.
+message Money {
+  string currency_code = 1;
+  int64  minor_units   = 2;
+}
+
+// PageRequest / PageResponse — cursor pagination.
+message PageRequest {
+  int32  size       = 1;
+  string page_token = 2;
+}
+message PageResponse {
+  string next_page_token = 1;
+  int64  total_size      = 2;
+}
+
+// AuditMetadata — required on every privileged write.
+// Anti-doping records: append-only, audit metadata is mandatory and
+// captured automatically by the WADA-siloed audit interceptor.
+message AuditMetadata {
+  string actor_id   = 1;
+  string actor_role = 2;
+  string ip_address = 3;
+  string user_agent = 4;
+  google.protobuf.Timestamp event_time = 5;
+}
+
+// ResponsibleGamblingContext — every betting RPC MUST include this.
+// Limit checks are evaluated server-side; never bypass.
+message ResponsibleGamblingContext {
+  string fan_token        = 1;
+  string jurisdiction     = 2;   // UKGC | MGA | NV | ...
+  bool   self_excluded    = 3;
+  Money  daily_limit      = 4;
+  Money  daily_spent      = 5;
+}
+
+// ConsentToken — youth (COPPA) parental consent / analytics opt-in token.
+message ConsentToken {
+  string id        = 1;
+  string issuer    = 2;
+  google.protobuf.Timestamp issued_at  = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  repeated string scopes = 5;
+}

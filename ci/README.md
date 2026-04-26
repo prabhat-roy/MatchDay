@@ -1,6 +1,16 @@
-# Ci — MatchDay
+# CI — MatchDay
 
-CI/CD pipelines across multiple platforms (Jenkins, GitHub Actions, GitLab CI, Tekton, Drone, etc.).
+CI pipelines across Jenkins (primary), GitHub Actions, GitLab CI, Tekton.
 
-> Skeleton placeholder. Content will be added as the project takes shape.
-> See [../README.md](../README.md) for the MatchDay project overview.
+| Path | Purpose |
+|---|---|
+| `jenkins/build.Jenkinsfile`     | per-service build + unit test + image push |
+| `jenkins/security.Jenkinsfile`  | trivy + semgrep + gitleaks + checkov + scorecard |
+| `jenkins/deploy.Jenkinsfile`    | Helm deploy to selected cloud + env |
+| `jenkins/agent-pod.yaml`        | agent pod spec |
+| `github-actions/pr-validation.yml` | PR gate (lint, scan, CodeQL) |
+| `github-actions/deploy.yml`     | manual deploy with cloud auth (OIDC) |
+| `gitlab-ci/.gitlab-ci.yml`      | Kaniko build + Trivy + Syft + Cosign |
+| `tekton/pipeline.yaml`          | helm-upgrade-from-source pipeline |
+
+Match-day deploys: betting + ticketing use **blue/green**, all others **canary**.

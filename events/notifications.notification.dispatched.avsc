@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.notifications.events",
+  "name": "NotificationDispatched",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "notification_id","type": "string" },
+    { "name": "channel",        "type": { "type": "enum", "name": "Channel", "symbols": ["PUSH","SMS","EMAIL","IN_APP"] } },
+    { "name": "template",       "type": "string" },
+    { "name": "fan_token",      "type": "string" }
+  ]
+}

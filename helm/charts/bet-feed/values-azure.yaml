@@ -1,0 +1,3 @@
+cloud: { provider: azure, storageClass: managed-csi-premium }
+serviceAccount: { annotations: { azure.workload.identity/client-id: "{{ .Values.azure.clientId }}" } }
+envFrom: [{ secretRef: { name: bet-feed-azure-secrets } }]

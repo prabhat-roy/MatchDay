@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata: { name: matchday-canary-analysis, namespace: matchday }
+spec:
+  args:
+    - name: service-name
+  metrics:
+    - name: success-rate
+      interval: 60s
+      successCondition: result[0] >= 0.99
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus.observability:9090
+          query: |
+            sum(rate(http_requests_total{service="{{args.service-name}}",status!~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total{service="{{args.service-name}}"}[5m]))
+    - name: p99-latency
+      interval: 60s
+      successCondition: result[0] <= 1
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus.observability:9090
+          query: |
+            histogram_quantile(0.99,
+              sum(rate(http_request_duration_seconds_bucket{service="{{args.service-name}}"}[5m]))
+              by (le))
+    - name: live-data-latency
+      interval: 30s
+      successCondition: result[0] <= 1
+      failureLimit: 2
+      provider:
+        prometheus:
+          address: http://prometheus.observability:9090
+          query: |
+            histogram_quantile(0.99,
+              sum(rate(matchday_live_data_glass_to_glass_seconds_bucket[2m]))
+              by (le))

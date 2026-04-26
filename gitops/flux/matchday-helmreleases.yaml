@@ -1,0 +1,14 @@
+# Flux generates one HelmRelease per chart in helm/charts/. Index release shown.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata: { name: matchday-platform, namespace: matchday }
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: helm/charts/api-gateway
+      sourceRef: { kind: GitRepository, name: matchday, namespace: flux-system }
+  valuesFrom:
+    - kind: ConfigMap
+      name: matchday-cloud-overlay
+      valuesKey: cloud-values.yaml

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fan-profile
+description: Fan identity, preferences, KYC for betting
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

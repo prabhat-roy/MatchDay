@@ -1,0 +1,6 @@
+apiVersion: v2
+name: scoring-engine
+description: Deterministic fantasy scoring (Kotlin/Spring + Flink); replayable from event log
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

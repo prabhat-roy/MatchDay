@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.matchops.events",
+  "name": "MatchEventRecorded",
+  "doc": "match-ops.event.recorded — canonical normalised live event from OPTA / StatsBomb. Out-of-order tolerant: consumers must use event_time_ms, not arrival.",
+  "fields": [
+    { "name": "event_id",        "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",   "type": { "type": "long", "logicalType": "timestamp-millis" }, "doc": "Provider stamp" },
+    { "name": "arrived_at_ms",   "type": { "type": "long", "logicalType": "timestamp-millis" }, "doc": "Ingest stamp; must NOT be used for ordering" },
+    { "name": "correlation_id",  "type": "string" },
+    { "name": "match",           "type": "com.matchday.common.events.MatchRef" },
+    { "name": "sequence",        "type": "long",   "doc": "Per-match monotonically increasing; idempotency key" },
+    { "name": "type",            "type": { "type": "enum", "name": "EventType", "symbols": ["GOAL","SHOT","PASS","TACKLE","FOUL","CARD","SUB","VAR","KICKOFF","HALFTIME","FULLTIME","CORNER","OFFSIDE","SAVE"] } },
+    { "name": "minute",          "type": "int" },
+    { "name": "added_time",      "type": ["null","int"], "default": null },
+    { "name": "team_id",         "type": "string" },
+    { "name": "athlete",         "type": ["null","com.matchday.common.events.AthleteIdRef"], "default": null },
+    { "name": "x",               "type": ["null","double"], "default": null, "doc": "Pitch x-coord 0-100" },
+    { "name": "y",               "type": ["null","double"], "default": null, "doc": "Pitch y-coord 0-100" },
+    { "name": "xg",              "type": ["null","double"], "default": null, "doc": "Expected goals (shots only)" },
+    { "name": "provider",        "type": { "type": "enum", "name": "Provider", "symbols": ["OPTA","STATSBOMB","HAWKEYE","TRACAB","INTERNAL"] } }
+  ]
+}

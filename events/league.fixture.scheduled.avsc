@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.league.events",
+  "name": "FixtureScheduled",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "match",          "type": "com.matchday.common.events.MatchRef" },
+    { "name": "kickoff_ms",     "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "home_team_id",   "type": "string" },
+    { "name": "away_team_id",   "type": "string" },
+    { "name": "venue_id",       "type": "string" }
+  ]
+}

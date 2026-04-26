@@ -1,0 +1,33 @@
+# SILOED — anti-doping namespace deny-all and only accept ingress from the
+# audit / WADA controller path. No other matchday-* namespace can talk to it.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: anti-doping-default-deny, namespace: matchday-anti-doping }
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: anti-doping-allow-ingress-wada, namespace: matchday-anti-doping }
+spec:
+  podSelector: {}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector: { matchLabels: { matchday.io/wada-controller: "true" } }
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: anti-doping-allow-egress-audit, namespace: matchday-anti-doping }
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+    # Egress only to the audit pipeline (Kafka) and DNS.
+    - to: [{ namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: kafka } } }]
+      ports: [{ port: 9092, protocol: TCP }]
+    - to:
+        - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: kube-system } }
+          podSelector:       { matchLabels: { k8s-app: kube-dns } }
+      ports: [{ port: 53, protocol: UDP }, { port: 53, protocol: TCP }]

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bet-feed
+description: Inbound bet gateway — responsible-gambling sidecar gates EVERY bet
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

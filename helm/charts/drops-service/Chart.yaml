@@ -1,0 +1,6 @@
+apiVersion: v2
+name: drops-service
+description: Limited merch drops with queue + bot mitigation; 10x surge target
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata: { name: bet-feed, namespace: matchday-betting }
+spec:
+  type: ClusterIP
+  ports: [{ port: 50241, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: bet-feed }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: bet-feed, namespace: matchday-betting }

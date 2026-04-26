@@ -1,0 +1,23 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata: { name: live-data-ingest, namespace: matchday-match-ops }
+spec:
+  scaleTargetRef: { name: live-data-ingest }
+  # Marquee 10x surge — fast scale-up, slow scale-down.
+  minReplicaCount: 6
+  maxReplicaCount: 60
+  pollingInterval: 5
+  cooldownPeriod: 600
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus.observability:9090
+        metricName: matchday_live_match_active
+        threshold: "1"
+        query: max(matchday_live_match_active)
+    - type: kafka
+      metadata:
+        bootstrapServers: matchday-kafka-bootstrap.kafka:9092
+        consumerGroup: live-data-ingest
+        topic: match-ops.event.recorded
+        lagThreshold: "200"

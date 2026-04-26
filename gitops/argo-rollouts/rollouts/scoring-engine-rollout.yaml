@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: scoring-engine, namespace: matchday }
+spec:
+  replicas: 4
+  strategy:
+    canary:
+      steps:
+        - setWeight: 10
+        - pause: { duration: 10m }   # ensure deterministic recompute holds across replays
+        - analysis:
+            templates: [{ templateName: matchday-canary-analysis }]
+            args: [{ name: service-name, value: scoring-engine }]
+        - setWeight: 50
+        - pause: { duration: 10m }
+        - setWeight: 100
+  selector: { matchLabels: { app.kubernetes.io/name: scoring-engine } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: scoring-engine } }
+    spec:
+      containers:
+        - name: scoring-engine
+          image: harbor.matchday.internal/matchday/scoring-engine:latest
+          ports: [{ containerPort: 50221 }]

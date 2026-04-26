@@ -1,0 +1,145 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-platform
+  labels:
+    matchday.io/domain: platform
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/warn: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-identity
+  labels:
+    matchday.io/domain: identity
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/warn: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-league
+  labels: { matchday.io/domain: league, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-club
+  labels: { matchday.io/domain: club, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-athlete
+  labels: { matchday.io/domain: athlete, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-performance
+  labels: { matchday.io/domain: performance, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-medicine
+  labels: { matchday.io/domain: medicine, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+# SILOED — anti-doping data plane. Cilium policy denies inter-namespace traffic.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-anti-doping
+  labels:
+    matchday.io/domain: medicine
+    matchday.io/siloed: wada
+    matchday.io/append-only: "true"
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/warn: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-match-ops
+  labels:
+    matchday.io/domain: match-ops
+    matchday.io/marquee-critical: "true"
+    pod-security.kubernetes.io/enforce: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-venue
+  labels: { matchday.io/domain: venue, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-broadcast
+  labels: { matchday.io/domain: broadcast, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-fan-engagement
+  labels:
+    matchday.io/domain: fan-engagement
+    matchday.io/marquee-critical: "true"
+    pod-security.kubernetes.io/enforce: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-fantasy
+  labels: { matchday.io/domain: fantasy, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-betting
+  labels:
+    matchday.io/domain: betting
+    matchday.io/regulated: "true"
+    pod-security.kubernetes.io/enforce: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-sponsorship
+  labels: { matchday.io/domain: sponsorship, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-merchandise
+  labels: { matchday.io/domain: merchandise, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-academy
+  labels:
+    matchday.io/domain: academy
+    matchday.io/coppa: "true"
+    pod-security.kubernetes.io/enforce: restricted
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-analytics
+  labels: { matchday.io/domain: analytics, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: matchday-notifications
+  labels: { matchday.io/domain: notifications, pod-security.kubernetes.io/enforce: restricted, istio-injection: enabled }

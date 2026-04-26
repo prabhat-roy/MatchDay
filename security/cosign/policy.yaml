@@ -1,0 +1,13 @@
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata: { name: matchday-cosign }
+spec:
+  images:
+    - glob: "harbor.matchday.internal/matchday/*"
+  authorities:
+    - name: keyless-github
+      keyless:
+        url: https://fulcio.sigstore.dev
+        identities:
+          - issuer: https://token.actions.githubusercontent.com
+            subjectRegExp: 'https://github.com/prabhat-roy/MatchDay/.*'

@@ -1,0 +1,21 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata: { name: drops-service, namespace: matchday-merchandise }
+spec:
+  scaleTargetRef: { name: drops-service }
+  minReplicaCount: 5
+  maxReplicaCount: 50
+  pollingInterval: 5
+  cooldownPeriod: 1800
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: matchday-kafka-bootstrap.kafka:9092
+        consumerGroup: drops-service
+        topic: merchandise.drop.released
+        lagThreshold: "50"
+    - type: redis
+      metadata:
+        address: matchday-redis.databases:6379
+        listName: drops:queue
+        listLength: "1000"

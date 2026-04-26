@@ -1,0 +1,2 @@
+cloud: { provider: azure }
+serviceAccount: { annotations: { azure.workload.identity/client-id: "{{ .Values.azure.clientId }}" } }

@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.broadcast.events",
+  "name": "ClipPublished",
+  "doc": "broadcast.clip.published — clip-publisher result; rights-checked.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "clip_id",        "type": "string" },
+    { "name": "match",          "type": "com.matchday.common.events.MatchRef" },
+    { "name": "duration_ms",    "type": "int" },
+    { "name": "rights_token",   "type": "string", "doc": "Rights-service issued token gating territory + window" },
+    { "name": "cdn_url",        "type": "string" }
+  ]
+}

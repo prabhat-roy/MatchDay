@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: bet-feed, namespace: matchday }
+spec:
+  # Blue/green for betting — never canary while live markets are open.
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService:  bet-feed-active
+      previewService: bet-feed-preview
+      autoPromotionEnabled: false
+      prePromotionAnalysis:
+        templates: [{ templateName: matchday-canary-analysis }]
+        args: [{ name: service-name, value: bet-feed }]
+  selector: { matchLabels: { app.kubernetes.io/name: bet-feed } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: bet-feed } }
+    spec:
+      containers:
+        - name: bet-feed
+          image: harbor.matchday.internal/matchday/bet-feed:latest
+          ports: [{ containerPort: 50241 }]

@@ -1,0 +1,10 @@
+syntax = "proto3";
+package matchday.venue.v1;
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.venue.v1";
+option java_multiple_files = true;
+
+// vip-service: hospitality, premium suites, concierge.
+service VipService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

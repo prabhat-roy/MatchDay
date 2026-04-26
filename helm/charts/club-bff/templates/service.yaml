@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: { name: {{ .Release.Name }}-club-bff, labels: { app.kubernetes.io/name: club-bff, app.kubernetes.io/part-of: matchday } }
+spec:
+  type: {{ .Values.service.type }}
+  ports: [{ port: {{ .Values.service.port }}, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: club-bff, app.kubernetes.io/instance: {{ .Release.Name }} }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Release.Name }}-club-bff
+  {{- with .Values.serviceAccount.annotations }}
+  annotations: {{- toYaml . | nindent 4 }}
+  {{- end }}

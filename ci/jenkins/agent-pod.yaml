@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels: { jenkins: agent, matchday.io/owner: ci }
+spec:
+  containers:
+    - name: jnlp
+      image: jenkins/inbound-agent:latest
+    - name: tools
+      image: matchday/jenkins-agent:latest
+      tty: true
+      command: ["sleep","infinity"]
+    - name: docker
+      image: docker:27-dind
+      securityContext: { privileged: true }

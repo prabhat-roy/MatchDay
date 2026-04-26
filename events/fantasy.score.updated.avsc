@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.fantasy.events",
+  "name": "FantasyScoreUpdated",
+  "doc": "fantasy.score.updated — emitted by scoring-engine after deterministic recompute from match-ops.event.recorded. Same input -> same output.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "fantasy_team_id","type": "string" },
+    { "name": "gameweek",       "type": "int" },
+    { "name": "match",          "type": "com.matchday.common.events.MatchRef" },
+    { "name": "score_delta",    "type": "int" },
+    { "name": "score_total",    "type": "int" },
+    { "name": "trigger_event_id","type": "string", "doc": "Source match-ops event id (idempotency)" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.venue.events",
+  "name": "TicketScanned",
+  "doc": "venue.ticket.scanned — turnstile scan; SLO target 500ms.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "ticket_id",      "type": "string" },
+    { "name": "venue_id",       "type": "string" },
+    { "name": "gate",           "type": "string" },
+    { "name": "match",          "type": "com.matchday.common.events.MatchRef" },
+    { "name": "scan_outcome",   "type": { "type": "enum", "name": "Outcome", "symbols": ["ADMIT","DUPLICATE","INVALID","REVOKED"] } }
+  ]
+}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: watch-party
+description: Elixir/Phoenix Channels — 500K+ concurrent fan WebSocket connections
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

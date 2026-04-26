@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: {{ .Release.Name }}-drops-service }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: {{ .Release.Name }}-drops-service }
+spec:
+  type: {{ .Values.service.type }}
+  ports: [{ port: {{ .Values.service.port }}, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: drops-service, app.kubernetes.io/instance: {{ .Release.Name }} }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-drops-service
+  labels: {{- toYaml .Values.podLabels | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: { matchLabels: { app.kubernetes.io/name: drops-service, app.kubernetes.io/instance: {{ .Release.Name }} } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: drops-service, app.kubernetes.io/instance: {{ .Release.Name }}, matchday.io/domain: merchandise } }
+    spec:
+      serviceAccountName: {{ .Release.Name }}-drops-service
+      securityContext: {{- toYaml .Values.securityContext | nindent 8 }}
+      containers:
+        - name: drops-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          ports: [{ name: http, containerPort: {{ .Values.service.targetPort }} }]
+          env:
+            - { name: PORT, value: "{{ .Values.service.targetPort }}" }
+            {{- range $k, $v := .Values.config }}
+            - { name: {{ $k }}, value: "{{ $v }}" }
+            {{- end }}
+          livenessProbe:  {{- toYaml .Values.probes.liveness  | nindent 12 }}
+          readinessProbe: {{- toYaml .Values.probes.readiness | nindent 12 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          securityContext: {{- toYaml .Values.containerSecurityContext | nindent 12 }}

@@ -1,0 +1,2 @@
+cloud: { provider: aws }
+serviceAccount: { annotations: { eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.aws.accountId }}:role/matchday-responsible-gambling } }

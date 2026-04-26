@@ -1,0 +1,40 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata: { name: matchday-daily, namespace: velero }
+spec:
+  schedule: "0 2 * * *"
+  template:
+    includedNamespaces:
+      - matchday-platform
+      - matchday-identity
+      - matchday-league
+      - matchday-club
+      - matchday-athlete
+      - matchday-performance
+      - matchday-medicine
+      - matchday-match-ops
+      - matchday-venue
+      - matchday-broadcast
+      - matchday-fan-engagement
+      - matchday-fantasy
+      - matchday-betting
+      - matchday-sponsorship
+      - matchday-merchandise
+      - matchday-academy
+      - matchday-analytics
+      - matchday-notifications
+    snapshotVolumes: true
+    ttl: 720h0m0s
+---
+# Anti-doping uses a separate, longer-retention schedule per WADA policy.
+apiVersion: velero.io/v1
+kind: Schedule
+metadata: { name: matchday-anti-doping-daily, namespace: velero }
+spec:
+  schedule: "0 3 * * *"
+  template:
+    includedNamespaces: [matchday-anti-doping]
+    snapshotVolumes: true
+    ttl: 8760h0m0s         # 1 year
+    storageLocation: anti-doping-only
+    volumeSnapshotLocations: [anti-doping-only]

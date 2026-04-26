@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata: { name: notification-orchestrator, namespace: matchday-notifications }
+spec:
+  scaleTargetRef: { name: notification-orchestrator }
+  minReplicaCount: 2
+  maxReplicaCount: 50
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: matchday-kafka-bootstrap.kafka:9092
+        consumerGroup: notification-orchestrator
+        topic: notifications.notification.dispatched
+        lagThreshold: "100"

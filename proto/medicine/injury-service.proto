@@ -1,0 +1,10 @@
+syntax = "proto3";
+package matchday.medicine.v1;
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.medicine.v1";
+option java_multiple_files = true;
+
+// injury-service: injury log, return-to-play timelines (HL7 compliant).
+service InjuryService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

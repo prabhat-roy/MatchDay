@@ -1,0 +1,11 @@
+syntax = "proto3";
+package matchday.fantasy.v1;
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.fantasy.v1";
+option java_multiple_files = true;
+
+// scoring-engine: deterministic recompute from event log (Kotlin/Spring + Flink).
+// Same input -> same output; replayable from match-ops.event.recorded.
+service ScoringEngineService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

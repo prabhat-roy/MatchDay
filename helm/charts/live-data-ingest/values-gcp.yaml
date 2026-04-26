@@ -1,0 +1,3 @@
+cloud: { provider: gcp, storageClass: pd-ssd }
+serviceAccount: { annotations: { iam.gke.io/gcp-service-account: matchday-live-data-ingest@{{ .Values.gcp.project }}.iam.gserviceaccount.com } }
+envFrom: [{ secretRef: { name: live-data-ingest-gcp-secrets } }]

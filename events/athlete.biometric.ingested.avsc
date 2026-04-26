@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.athlete.events",
+  "name": "BiometricIngested",
+  "doc": "Pointer event; payload is in TimescaleDB to keep Kafka payload small (high cardinality). Anti-doping NEVER produces here.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "athlete",        "type": "com.matchday.common.events.AthleteIdRef" },
+    { "name": "match",          "type": ["null","com.matchday.common.events.MatchRef"], "default": null },
+    { "name": "sample_count",   "type": "long" }
+  ]
+}

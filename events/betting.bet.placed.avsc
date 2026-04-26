@@ -1,0 +1,21 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.betting.events",
+  "name": "BetPlaced",
+  "doc": "betting.bet.placed — only emitted AFTER responsible-gambling limit check + KYC pass. Bypassing the limit check is forbidden (CLAUDE.md behavior rule).",
+  "fields": [
+    { "name": "event_id",        "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",   "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id",  "type": "string" },
+    { "name": "bet_id",          "type": "string" },
+    { "name": "fan_token",       "type": "string" },
+    { "name": "jurisdiction",    "type": "string", "doc": "UKGC | MGA | NV | ..." },
+    { "name": "match",           "type": "com.matchday.common.events.MatchRef" },
+    { "name": "market",          "type": "string" },
+    { "name": "selection",       "type": "string" },
+    { "name": "stake_currency",  "type": "string" },
+    { "name": "stake_minor",     "type": "long" },
+    { "name": "odds_decimal",    "type": "double" },
+    { "name": "rg_check_id",     "type": "string", "doc": "Responsible-gambling check identifier — REQUIRED" }
+  ]
+}

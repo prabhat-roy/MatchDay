@@ -1,0 +1,43 @@
+# SILOED — namespace matchday-anti-doping; Cilium policy denies cross-namespace.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anti-doping-service
+  namespace: matchday-anti-doping
+  labels:
+    app.kubernetes.io/name: anti-doping-service
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: medicine
+    matchday.io/siloed: wada
+    matchday.io/append-only: "true"
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: anti-doping-service } }
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: anti-doping-service
+        matchday.io/domain: medicine
+        matchday.io/siloed: wada
+    spec:
+      serviceAccountName: anti-doping-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: anti-doping-service
+          image: harbor.matchday.internal/matchday/anti-doping-service:latest
+          ports: [{ containerPort: 50161, name: http }]
+          env:
+            - { name: POSTGRES_HOST, value: matchday-anti-doping-pg.matchday-anti-doping }
+            - { name: POSTGRES_DB,   value: anti_doping }
+            - { name: KMS_KEY_ID,    value: alias/matchday-anti-doping }
+            - { name: AUDIT_TOPIC,   value: platform.audit.action-recorded }
+            - { name: APPEND_ONLY,   value: "true" }
+          livenessProbe:  { httpGet: { path: /healthz, port: 50161 } }
+          readinessProbe: { httpGet: { path: /healthz, port: 50161 } }
+          resources:
+            requests: { cpu: 200m, memory: 256Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

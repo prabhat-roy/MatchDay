@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.identity.events",
+  "name": "SessionStarted",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "subject_token",  "type": "string" },
+    { "name": "subject_kind",   "type": { "type": "enum", "name": "SubjectKind", "symbols": ["FAN","ATHLETE","CLUB_STAFF","OFFICIAL"] } },
+    { "name": "mfa_used",       "type": "boolean" },
+    { "name": "ip_hash",        "type": "string" }
+  ]
+}

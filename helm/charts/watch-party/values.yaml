@@ -1,0 +1,23 @@
+# Elixir BEAM tuning — large connection budget; Erlang scheduler bound to cores.
+image: { repository: matchday/watch-party, tag: "" }
+replicaCount: 4
+service: { type: ClusterIP, port: 4000, targetPort: 4000 }
+resources:
+  requests: { cpu: 1000m, memory: 2Gi }
+  limits:   { cpu: 4000m, memory: 8Gi }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 4000 }, initialDelaySeconds: 30, periodSeconds: 10 }
+  readiness: { httpGet: { path: /healthz, port: 4000 }, initialDelaySeconds: 10, periodSeconds: 5 }
+serviceAccount: { create: true, annotations: {} }
+podLabels: { app.kubernetes.io/name: watch-party, app.kubernetes.io/part-of: matchday, matchday.io/domain: fan-engagement, matchday.io/marquee-critical: "true" }
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  ERL_MAX_PORTS: "1048576"
+  ERLANG_COOKIE: "${ERLANG_COOKIE}"
+  POOL_SIZE: "32"
+  NATS_URL: "nats://matchday-nats.messaging:4222"
+  PRESENCE_TOPIC: "match-ops.event.recorded"
+envFrom: []
+cloud: {}

@@ -1,0 +1,28 @@
+# SILOED — namespace `matchday-anti-doping`. Cilium policy denies inter-namespace traffic.
+# Separate Postgres cluster + Vault transit key + KMS key.
+namespace: matchday-anti-doping
+image: { repository: matchday/anti-doping-service, tag: "" }
+replicaCount: 2
+service: { type: ClusterIP, port: 50161, targetPort: 50161 }
+resources: { requests: { cpu: 200m, memory: 256Mi }, limits: { cpu: 1000m, memory: 512Mi } }
+probes:
+  liveness:  { httpGet: { path: /healthz, port: 50161 } }
+  readiness: { httpGet: { path: /healthz, port: 50161 } }
+serviceAccount: { create: true, annotations: {} }
+podLabels:
+  app.kubernetes.io/name: anti-doping-service
+  app.kubernetes.io/part-of: matchday
+  matchday.io/domain: medicine
+  matchday.io/siloed: "wada"
+  matchday.io/append-only: "true"
+securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+containerSecurityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ["ALL"] } }
+config:
+  LOG_LEVEL: info
+  POSTGRES_HOST: "matchday-anti-doping-pg.matchday-anti-doping"
+  POSTGRES_DB:   "anti_doping"
+  KMS_KEY_ID:    "alias/matchday-anti-doping"
+  VAULT_TRANSIT_KEY: "matchday-anti-doping"
+  AUDIT_TOPIC: "platform.audit.action-recorded"
+envFrom: []
+cloud: {}

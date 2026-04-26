@@ -1,0 +1,25 @@
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: api-gateway, namespace: matchday-platform }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: api-gateway } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: live-data-ingest, namespace: matchday-match-ops }
+spec: { minAvailable: 4, selector: { matchLabels: { app.kubernetes.io/name: live-data-ingest } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: watch-party, namespace: matchday-fan-engagement }
+spec: { minAvailable: 3, selector: { matchLabels: { app.kubernetes.io/name: watch-party } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: scoring-engine, namespace: matchday-fantasy }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: scoring-engine } } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: bet-feed, namespace: matchday-betting }
+spec: { minAvailable: 2, selector: { matchLabels: { app.kubernetes.io/name: bet-feed } } }

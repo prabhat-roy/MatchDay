@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: matchday
+  namespace: argocd
+spec:
+  description: MatchDay platform applications
+  sourceRepos:
+    - https://github.com/prabhat-roy/MatchDay.git
+  destinations:
+    - { namespace: matchday,                server: https://kubernetes.default.svc }
+    - { namespace: matchday-*,              server: https://kubernetes.default.svc }
+    - { namespace: matchday-anti-doping,    server: https://kubernetes.default.svc }
+  clusterResourceWhitelist:    [{ group: '*', kind: '*' }]
+  namespaceResourceWhitelist:  [{ group: '*', kind: '*' }]

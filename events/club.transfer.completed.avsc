@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.club.events",
+  "name": "TransferCompleted",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "transfer_id",    "type": "string" },
+    { "name": "athlete",        "type": "com.matchday.common.events.AthleteIdRef" },
+    { "name": "from_club_id",   "type": "string" },
+    { "name": "to_club_id",     "type": "string" },
+    { "name": "fee_currency",   "type": "string" },
+    { "name": "fee_minor",      "type": "long" }
+  ]
+}

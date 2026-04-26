@@ -1,0 +1,10 @@
+syntax = "proto3";
+package matchday.club.v1;
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.club.v1";
+option java_multiple_files = true;
+
+// club-service: club registry, ownership, badge, colours.
+service ClubService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

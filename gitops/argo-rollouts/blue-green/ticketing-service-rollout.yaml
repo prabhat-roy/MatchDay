@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: ticketing-service, namespace: matchday }
+spec:
+  # Blue/green for ticketing — never canary on match day (CLAUDE.md behavior rule).
+  replicas: 4
+  strategy:
+    blueGreen:
+      activeService:  ticketing-service-active
+      previewService: ticketing-service-preview
+      autoPromotionEnabled: false
+      prePromotionAnalysis:
+        templates: [{ templateName: matchday-canary-analysis }]
+        args: [{ name: service-name, value: ticketing-service }]
+  selector: { matchLabels: { app.kubernetes.io/name: ticketing-service } }
+  template:
+    metadata: { labels: { app.kubernetes.io/name: ticketing-service } }
+    spec:
+      containers:
+        - name: ticketing-service
+          image: harbor.matchday.internal/matchday/ticketing-service:latest
+          ports: [{ containerPort: 50171 }]

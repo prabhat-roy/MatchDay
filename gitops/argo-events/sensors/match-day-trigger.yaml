@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata: { name: match-day-trigger, namespace: argo-events }
+spec:
+  # Triggered by fixture-service publishing league.fixture.scheduled events 90m pre-kickoff.
+  dependencies:
+    - { name: kickoff-90m, eventSourceName: kafka, eventName: league-fixture-scheduled }
+  triggers:
+    - template:
+        name: match-day-prep
+        argoWorkflow:
+          group: argoproj.io
+          version: v1alpha1
+          resource: workflows
+          operation: submit
+          source:
+            resource:
+              apiVersion: argoproj.io/v1alpha1
+              kind: Workflow
+              metadata: { generateName: match-day-prep- }
+              spec:
+                workflowTemplateRef: { name: matchday-match-day-prep }
+                arguments:
+                  parameters: [{ name: match-id, value: "{{ .Input.body.match_id }}" }]

@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.medicine.events",
+  "name": "AntiDopingTestRecorded",
+  "doc": "WADA anti-doping test event. SILOED Postgres + namespace + KMS keys. Append-only (CLAUDE.md coding rule #5). Consumers in non-medicine namespaces are NOT permitted by Cilium policy.",
+  "fields": [
+    { "name": "event_id",        "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",   "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id",  "type": "string" },
+    { "name": "actor_id",        "type": "string", "doc": "Mandatory audit subject" },
+    { "name": "test_record_id",  "type": "string" },
+    { "name": "athlete",         "type": "com.matchday.common.events.AthleteIdRef" },
+    { "name": "test_type",       "type": { "type": "enum", "name": "TestType", "symbols": ["IN_COMPETITION","OUT_OF_COMPETITION","TARGETED"] } },
+    { "name": "sample_code",     "type": "string", "doc": "WADA sample code" },
+    { "name": "result_status",   "type": { "type": "enum", "name": "ResultStatus", "symbols": ["NEGATIVE","ATYPICAL","ADVERSE","PENDING"] } }
+  ]
+}

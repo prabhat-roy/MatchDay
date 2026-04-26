@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata: { name: anti-doping-service, namespace: matchday-anti-doping }
+spec:
+  type: ClusterIP
+  ports: [{ port: 50161, targetPort: http, name: http }]
+  selector: { app.kubernetes.io/name: anti-doping-service }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: { name: anti-doping-service, namespace: matchday-anti-doping }

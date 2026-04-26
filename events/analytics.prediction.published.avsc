@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.analytics.events",
+  "name": "PredictionPublished",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "model_name",     "type": "string" },
+    { "name": "model_version",  "type": "string" },
+    { "name": "match",          "type": "com.matchday.common.events.MatchRef" },
+    { "name": "payload_json",   "type": "string", "doc": "Free-form prediction payload" }
+  ]
+}

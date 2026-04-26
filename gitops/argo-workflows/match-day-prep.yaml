@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata: { name: matchday-match-day-prep, namespace: argo }
+spec:
+  # Triggered 90 minutes before kickoff (CLAUDE.md key design decision #5).
+  # Pre-warms node pools, scales fan-facing services, primes caches.
+  entrypoint: prep
+  arguments: { parameters: [{ name: match-id }] }
+  templates:
+    - name: prep
+      steps:
+        - - { name: scale-watch-party,    template: kubectl-scale, arguments: { parameters: [{ name: target, value: "deployment/watch-party"      }, { name: replicas, value: "20" }] } }
+        - - { name: scale-fan-bff,        template: kubectl-scale, arguments: { parameters: [{ name: target, value: "deployment/fan-bff"          }, { name: replicas, value: "30" }] } }
+        - - { name: scale-live-data,      template: kubectl-scale, arguments: { parameters: [{ name: target, value: "deployment/live-data-ingest" }, { name: replicas, value: "12" }] } }
+        - - { name: prime-redis,          template: redis-prime,   arguments: { parameters: [{ name: match-id, value: "{{workflow.parameters.match-id}}" }] } }
+        - - { name: notify-status-page,   template: status-update }
+    - name: kubectl-scale
+      inputs: { parameters: [{ name: target }, { name: replicas }] }
+      container:
+        image: bitnami/kubectl:latest
+        command: ["kubectl","-n","matchday","scale","{{inputs.parameters.target}}","--replicas={{inputs.parameters.replicas}}"]
+    - name: redis-prime
+      inputs: { parameters: [{ name: match-id }] }
+      container:
+        image: matchday/jenkins-agent:latest
+        command: ["bash","-c","echo prime caches for {{inputs.parameters.match-id}}"]
+    - name: status-update
+      container: { image: matchday/jenkins-agent:latest, command: ["bash","-c","echo posting match-day status to status page"] }

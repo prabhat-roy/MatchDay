@@ -1,0 +1,8 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.common.events",
+  "name": "AthleteIdRef",
+  "fields": [
+    { "name": "token", "type": "string", "doc": "Tokenised athlete reference; reverse-lookup gated by Vault" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.platform.events",
+  "name": "AuditActionRecorded",
+  "doc": "Cross-cutting privileged-action audit. Anti-doping data access automatically emits to this topic in addition to its own siloed log.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "actor_id",       "type": "string" },
+    { "name": "actor_role",     "type": "string" },
+    { "name": "action",         "type": "string" },
+    { "name": "resource",       "type": "string" },
+    { "name": "outcome",        "type": "string" }
+  ]
+}

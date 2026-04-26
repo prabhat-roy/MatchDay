@@ -1,0 +1,11 @@
+syntax = "proto3";
+package matchday.performance.v1;
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
+option java_package = "com.matchday.performance.v1";
+option java_multiple_files = true;
+
+// event-tracking: per-event metrics (passes, tackles, shots) — OPTA/StatsBomb consumer.
+service EventTrackingService { rpc Health(HealthRequest) returns (HealthResponse); }
+message HealthRequest {}
+message HealthResponse { string status = 1; google.protobuf.Timestamp checked_at = 2; }

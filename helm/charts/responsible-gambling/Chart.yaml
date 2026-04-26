@@ -1,0 +1,6 @@
+apiVersion: v2
+name: responsible-gambling
+description: Authoritative limits / self-exclusion register; never bypass
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

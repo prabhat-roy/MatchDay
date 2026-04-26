@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "namespace": "com.matchday.merchandise.events",
+  "name": "DropReleased",
+  "doc": "10x surge expected at release minute — KEDA scales drops-service from Kafka lag.",
+  "fields": [
+    { "name": "event_id",       "type": { "type": "string", "logicalType": "uuid" } },
+    { "name": "event_time_ms",  "type": { "type": "long",   "logicalType": "timestamp-millis" } },
+    { "name": "correlation_id", "type": "string" },
+    { "name": "drop_id",        "type": "string" },
+    { "name": "sku",            "type": "string" },
+    { "name": "units_total",    "type": "int" }
+  ]
+}
