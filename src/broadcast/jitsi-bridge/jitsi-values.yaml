@@ -1,0 +1,9 @@
+# Jitsi Meet — open-source live video for fan watch-parties + sports broadcasting
+prosody: { persistence: { enabled: true } }
+jicofo:  { replicaCount: 2 }
+jvb:     { replicaCount: 4 }
+web:
+  ingress:
+    enabled: true
+    hosts: [{ host: live.matchday.com }]
+publicURL: https://live.matchday.com

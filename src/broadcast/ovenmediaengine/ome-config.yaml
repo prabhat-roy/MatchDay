@@ -1,0 +1,8 @@
+# OvenMediaEngine — sub-second live streaming
+server:
+  name: matchday-live
+  type: live
+  publishers: [WebRTC, LLHLS]
+  providers: [RTMP, SRT, MPEGTS]
+hosts:
+  - { name: matchday, distribution: live, primary: ome.matchday.com }
