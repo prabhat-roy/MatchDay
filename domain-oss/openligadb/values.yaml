@@ -1,0 +1,2 @@
+﻿# OpenLigaDB — open football match-data ingester
+openligadb: { schedule: hourly, leagues: [bl1, bl2, pl, laliga, seriea] }

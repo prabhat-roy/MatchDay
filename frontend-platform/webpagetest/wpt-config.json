@@ -1,0 +1,7 @@
+﻿{
+  "server": "https://wpt.matchday.internal",
+  "tests": [
+    { "url": "https://www.matchday.internal/", "location": "Dulles:Chrome", "runs": 3, "connectivity": "4G" },
+    { "url": "https://app.matchday.internal/", "location": "Mumbai:Chrome", "runs": 3, "connectivity": "Cable" }
+  ]
+}

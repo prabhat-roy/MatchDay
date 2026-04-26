@@ -1,0 +1,16 @@
+﻿# Skaffold pipeline for MatchDay
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata: { name: matchday }
+build:
+  artifacts:
+    - { image: matchday/api-gateway, context: src/api-gateway }
+    - { image: matchday/identity-service, context: src/identity-service }
+  local: { push: false }
+deploy:
+  helm:
+    releases:
+      - { name: api-gateway, chartPath: helm/charts/api-gateway, namespace: matchday }
+profiles:
+  - name: prod
+    deploy: { kubectl: { manifests: ["manifests/prod/*.yaml"] } }

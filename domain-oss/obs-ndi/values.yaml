@@ -1,0 +1,2 @@
+﻿# OBS-NDI — Network Device Interface bridge for live broadcast
+obs-ndi: { source: { name: matchday-broadcast }, output: { multicast: true } }

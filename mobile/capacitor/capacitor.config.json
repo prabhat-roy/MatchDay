@@ -1,0 +1,11 @@
+﻿{
+  "appId": "com.matchday.app",
+  "appName": "MatchDay",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" },
+  "plugins": {
+    "PushNotifications": { "presentationOptions": ["badge", "sound", "alert"] },
+    "Camera": { "permissions": ["camera", "photos"] },
+    "Geolocation": { "permissions": ["location"] }
+  }
+}

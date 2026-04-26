@@ -1,0 +1,6 @@
+﻿# Sourcegraph (OSS) — universal code search across MatchDay
+image: { repository: sourcegraph/server, tag: 5.5.0 }
+sourcegraph:
+  externalURL: https://sourcegraph.matchday.internal
+  repositoriesToAdd: [github.com/prabhat-roy/MatchDay]
+ingress: { enabled: true, hosts: [{ host: sourcegraph.matchday.internal }] }

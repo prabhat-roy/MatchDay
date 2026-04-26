@@ -1,0 +1,9 @@
+﻿# in-toto layout — supply-chain step attestations for MatchDay
+expires: "2027-01-01T00:00:00Z"
+keys: { project-key: { keyid: matchday-key, keytype: ed25519, scheme: ed25519 } }
+steps:
+  - { name: source, expected_command: ["git", "clone"], pubkeys: [matchday-key] }
+  - { name: build, expected_command: ["docker", "build"], pubkeys: [matchday-key] }
+  - { name: test, expected_command: ["make", "test"], pubkeys: [matchday-key] }
+inspect:
+  - { name: signed-image, run: ["cosign", "verify"], expected_materials: [], expected_products: [] }
