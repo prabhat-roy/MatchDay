@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fitness-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: fitness-service, matchday.io/domain: medicine }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50122, targetPort: 50122 }]
+  selector: { app.kubernetes.io/name: fitness-service }

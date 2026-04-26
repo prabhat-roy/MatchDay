@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: collectibles
+  namespace: matchday
+  labels: { app.kubernetes.io/name: collectibles, matchday.io/domain: fan-engagement }
+data:
+  LOG_LEVEL: info
+  PORT: "50202"

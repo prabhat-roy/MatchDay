@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: personalisation
+  namespace: matchday
+  labels: { app.kubernetes.io/name: personalisation, matchday.io/domain: merchandise }
+data:
+  LOG_LEVEL: info
+  PORT: "50282"

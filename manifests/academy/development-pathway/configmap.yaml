@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: development-pathway
+  namespace: matchday
+  labels: { app.kubernetes.io/name: development-pathway, matchday.io/domain: academy }
+data:
+  LOG_LEVEL: info
+  PORT: "50302"

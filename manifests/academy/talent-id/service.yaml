@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: talent-id
+  namespace: matchday
+  labels: { app.kubernetes.io/name: talent-id, matchday.io/domain: academy }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50301, targetPort: 50301 }]
+  selector: { app.kubernetes.io/name: talent-id }

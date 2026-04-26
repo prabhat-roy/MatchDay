@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: activation-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: activation-service, matchday.io/domain: sponsorship }
+data:
+  LOG_LEVEL: info
+  PORT: "50260"

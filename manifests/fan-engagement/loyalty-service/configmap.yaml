@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loyalty-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: loyalty-service, matchday.io/domain: fan-engagement }
+data:
+  LOG_LEVEL: info
+  PORT: "50200"

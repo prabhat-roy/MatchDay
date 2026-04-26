@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contract-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: contract-service, matchday.io/domain: club }
+data:
+  LOG_LEVEL: info
+  PORT: "50062"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playoff-service
+  namespace: matchday
+  labels:
+    app.kubernetes.io/name: playoff-service
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: league
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: playoff-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: playoff-service, matchday.io/domain: league }
+    spec:
+      serviceAccountName: playoff-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: playoff-service
+          image: harbor.matchday.internal/matchday/playoff-service:latest
+          ports: [{ containerPort: 50043, name: http }]
+          envFrom: [{ configMapRef: { name: playoff-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50043 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50043 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

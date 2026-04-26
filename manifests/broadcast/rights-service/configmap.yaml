@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rights-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: rights-service, matchday.io/domain: broadcast }
+data:
+  LOG_LEVEL: info
+  PORT: "50180"

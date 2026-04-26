@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: season-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: season-service, matchday.io/domain: league }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50040, targetPort: 50040 }]
+  selector: { app.kubernetes.io/name: season-service }

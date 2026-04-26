@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: highlights-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: highlights-service, matchday.io/domain: broadcast }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50182, targetPort: 50182 }]
+  selector: { app.kubernetes.io/name: highlights-service }

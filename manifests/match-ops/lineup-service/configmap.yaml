@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lineup-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: lineup-service, matchday.io/domain: match-ops }
+data:
+  LOG_LEVEL: info
+  PORT: "50140"

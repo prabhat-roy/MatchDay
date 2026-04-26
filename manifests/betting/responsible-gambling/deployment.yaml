@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: responsible-gambling
+  namespace: matchday
+  labels:
+    app.kubernetes.io/name: responsible-gambling
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: betting
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: responsible-gambling } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: responsible-gambling, matchday.io/domain: betting }
+    spec:
+      serviceAccountName: responsible-gambling
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: responsible-gambling
+          image: harbor.matchday.internal/matchday/responsible-gambling:latest
+          ports: [{ containerPort: 50243, name: http }]
+          envFrom: [{ configMapRef: { name: responsible-gambling } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50243 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50243 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

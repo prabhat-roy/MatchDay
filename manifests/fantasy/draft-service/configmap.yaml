@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: draft-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: draft-service, matchday.io/domain: fantasy }
+data:
+  LOG_LEVEL: info
+  PORT: "50220"

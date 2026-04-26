@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clip-service
+  namespace: matchday
+  labels:
+    app.kubernetes.io/name: clip-service
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: broadcast
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: clip-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: clip-service, matchday.io/domain: broadcast }
+    spec:
+      serviceAccountName: clip-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: clip-service
+          image: harbor.matchday.internal/matchday/clip-service:latest
+          ports: [{ containerPort: 50183, name: http }]
+          envFrom: [{ configMapRef: { name: clip-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50183 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50183 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

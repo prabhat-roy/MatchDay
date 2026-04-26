@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lineup-service
+  namespace: matchday
+  labels:
+    app.kubernetes.io/name: lineup-service
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: match-ops
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: lineup-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: lineup-service, matchday.io/domain: match-ops }
+    spec:
+      serviceAccountName: lineup-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: lineup-service
+          image: harbor.matchday.internal/matchday/lineup-service:latest
+          ports: [{ containerPort: 50140, name: http }]
+          envFrom: [{ configMapRef: { name: lineup-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50140 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50140 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: catalogue-service, matchday.io/domain: merchandise }
+spec:
+  type: ClusterIP
+  ports: [{ name: http, port: 50280, targetPort: 50280 }]
+  selector: { app.kubernetes.io/name: catalogue-service }

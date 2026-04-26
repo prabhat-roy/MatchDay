@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: season-service
+  namespace: matchday
+  labels: { app.kubernetes.io/name: season-service, matchday.io/domain: league }
+data:
+  LOG_LEVEL: info
+  PORT: "50040"

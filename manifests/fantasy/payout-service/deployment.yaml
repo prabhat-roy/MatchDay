@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payout-service
+  namespace: matchday
+  labels:
+    app.kubernetes.io/name: payout-service
+    app.kubernetes.io/part-of: matchday
+    matchday.io/domain: fantasy
+spec:
+  replicas: 2
+  selector: { matchLabels: { app.kubernetes.io/name: payout-service } }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: payout-service, matchday.io/domain: fantasy }
+    spec:
+      serviceAccountName: payout-service
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, fsGroup: 1000 }
+      containers:
+        - name: payout-service
+          image: harbor.matchday.internal/matchday/payout-service:latest
+          ports: [{ containerPort: 50223, name: http }]
+          envFrom: [{ configMapRef: { name: payout-service } }]
+          livenessProbe:  { httpGet: { path: /healthz, port: 50223 }, initialDelaySeconds: 15 }
+          readinessProbe: { httpGet: { path: /healthz, port: 50223 }, initialDelaySeconds: 5 }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits:   { cpu: 1000m, memory: 512Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
