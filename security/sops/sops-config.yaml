@@ -1,0 +1,7 @@
+creation_rules:
+  - path_regex: secrets/matchday/.*\.yaml
+    kms: arn:aws:kms:us-east-1:111111111111:alias/matchday-sops
+  - path_regex: secrets/matchday/gcp/.*\.yaml
+    gcp_kms: projects/matchday-prod/locations/global/keyRings/matchday/cryptoKeys/sops
+  - path_regex: secrets/matchday/azure/.*\.yaml
+    azure_keyvault: https://matchday-kv.vault.azure.net/keys/sops/abc123

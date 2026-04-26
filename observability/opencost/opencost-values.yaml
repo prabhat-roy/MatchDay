@@ -1,0 +1,9 @@
+opencost:
+  prometheus: { internal: { enabled: false }, external: { url: http://prometheus.observability:9090 } }
+  ui: { enabled: true }
+  exporter:
+    cloudProviderApiKey: ""
+    defaultClusterId: matchday-prod
+ingress:
+  enabled: true
+  hosts: [{ host: opencost.matchday.internal, paths: [{ path: /, pathType: Prefix }] }]

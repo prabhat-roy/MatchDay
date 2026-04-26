@@ -1,0 +1,8 @@
+config:
+  rootDomain: pomerium.matchday.internal
+  generateSignedJWT: true
+authenticate:
+  idp:
+    provider: oidc
+    url: https://keycloak.matchday.internal
+ingressController: { enabled: true }

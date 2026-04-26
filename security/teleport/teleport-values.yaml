@@ -1,0 +1,10 @@
+clusterName: matchday.teleport.internal
+authentication:
+  type: github
+  githubConnector:
+    name: github
+    redirectUrl: https://teleport.matchday.internal/v1/webapi/github/callback
+kubeClusterName: matchday-prod
+ingress:
+  enabled: true
+  hostname: teleport.matchday.internal
