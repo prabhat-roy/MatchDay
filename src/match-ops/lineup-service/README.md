@@ -1,8 +1,8 @@
-# lineup-service
+﻿# lineup-service
 
-Service in the **match-ops** domain of MatchDay.
+Service in the match-ops domain of MatchDay.
 
-**Language:** Go · **Port:** 50140
+Language: Go Â· Port: 50140
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/lineup-service/](../../../helm/charts/lineup-service/) — Helm chart
-- [manifests/match-ops/lineup-service/](../../../manifests/match-ops/lineup-service/) — Raw K8s manifests
+- [helm/charts/lineup-service/](../../../helm/charts/lineup-service/) â€” Helm chart
+- [manifests/match-ops/lineup-service/](../../../manifests/match-ops/lineup-service/) â€” Raw K8s manifests

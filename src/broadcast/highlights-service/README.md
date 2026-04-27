@@ -1,8 +1,8 @@
-# highlights-service
+﻿# highlights-service
 
-Service in the **broadcast** domain of MatchDay.
+Service in the broadcast domain of MatchDay.
 
-**Language:** Go · **Port:** 50182
+Language: Go Â· Port: 50182
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/highlights-service/](../../../helm/charts/highlights-service/) — Helm chart
-- [manifests/broadcast/highlights-service/](../../../manifests/broadcast/highlights-service/) — Raw K8s manifests
+- [helm/charts/highlights-service/](../../../helm/charts/highlights-service/) â€” Helm chart
+- [manifests/broadcast/highlights-service/](../../../manifests/broadcast/highlights-service/) â€” Raw K8s manifests

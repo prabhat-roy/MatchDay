@@ -1,8 +1,8 @@
-# squad-service
+﻿# squad-service
 
-Service in the **club** domain of MatchDay.
+Service in the club domain of MatchDay.
 
-**Language:** Go · **Port:** 50060
+Language: Go Â· Port: 50060
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/squad-service/](../../../helm/charts/squad-service/) — Helm chart
-- [manifests/club/squad-service/](../../../manifests/club/squad-service/) — Raw K8s manifests
+- [helm/charts/squad-service/](../../../helm/charts/squad-service/) â€” Helm chart
+- [manifests/club/squad-service/](../../../manifests/club/squad-service/) â€” Raw K8s manifests

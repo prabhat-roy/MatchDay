@@ -1,5 +1,5 @@
-# auth-service
+﻿# auth-service
 
 OAuth2/OIDC + WebAuthn fan auth
 
-**Domain:** `identity` · **Language:** rust · **Port:** 50020
+Domain: `identity` Â· Language: rust Â· Port: 50020

@@ -1,8 +1,8 @@
-# injury-service
+﻿# injury-service
 
-Service in the **medicine** domain of MatchDay.
+Service in the medicine domain of MatchDay.
 
-**Language:** Go · **Port:** 50120
+Language: Go Â· Port: 50120
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/injury-service/](../../../helm/charts/injury-service/) — Helm chart
-- [manifests/medicine/injury-service/](../../../manifests/medicine/injury-service/) — Raw K8s manifests
+- [helm/charts/injury-service/](../../../helm/charts/injury-service/) â€” Helm chart
+- [manifests/medicine/injury-service/](../../../manifests/medicine/injury-service/) â€” Raw K8s manifests

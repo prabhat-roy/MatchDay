@@ -1,6 +1,6 @@
-# academy — MatchDay
+﻿# academy â€” MatchDay
 
-Youth & academy. **COPPA** controls for youth data — parental consent workflows.
+Youth & academy. COPPA controls for youth data â€” parental consent workflows.
 
 | Service | Language | Port | Description |
 |---|---|---|---|

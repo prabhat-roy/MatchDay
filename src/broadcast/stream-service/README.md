@@ -1,5 +1,5 @@
-# stream-service
+﻿# stream-service
 
 Low-latency stream packaging (LL-HLS / WebRTC)
 
-**Domain:** `broadcast` · **Language:** rust · **Port:** 50181
+Domain: `broadcast` Â· Language: rust Â· Port: 50181

@@ -1,8 +1,8 @@
-# video-analysis
+﻿# video-analysis
 
-Service in the **performance** domain of MatchDay.
+Service in the performance domain of MatchDay.
 
-**Language:** Go · **Port:** 50102
+Language: Go Â· Port: 50102
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/video-analysis/](../../../helm/charts/video-analysis/) — Helm chart
-- [manifests/performance/video-analysis/](../../../manifests/performance/video-analysis/) — Raw K8s manifests
+- [helm/charts/video-analysis/](../../../helm/charts/video-analysis/) â€” Helm chart
+- [manifests/performance/video-analysis/](../../../manifests/performance/video-analysis/) â€” Raw K8s manifests

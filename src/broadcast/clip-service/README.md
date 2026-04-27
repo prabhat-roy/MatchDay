@@ -1,8 +1,8 @@
-# clip-service
+﻿# clip-service
 
-Service in the **broadcast** domain of MatchDay.
+Service in the broadcast domain of MatchDay.
 
-**Language:** Go · **Port:** 50183
+Language: Go Â· Port: 50183
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/clip-service/](../../../helm/charts/clip-service/) — Helm chart
-- [manifests/broadcast/clip-service/](../../../manifests/broadcast/clip-service/) — Raw K8s manifests
+- [helm/charts/clip-service/](../../../helm/charts/clip-service/) â€” Helm chart
+- [manifests/broadcast/clip-service/](../../../manifests/broadcast/clip-service/) â€” Raw K8s manifests

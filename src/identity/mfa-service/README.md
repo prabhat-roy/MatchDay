@@ -1,5 +1,5 @@
-# mfa-service
+﻿# mfa-service
 
 MFA / TOTP / WebAuthn
 
-**Domain:** `identity` · **Language:** go · **Port:** 50024
+Domain: `identity` Â· Language: go Â· Port: 50024

@@ -1,8 +1,8 @@
-# personalisation
+﻿# personalisation
 
-Service in the **merchandise** domain of MatchDay.
+Service in the merchandise domain of MatchDay.
 
-**Language:** Go · **Port:** 50282
+Language: Go Â· Port: 50282
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/personalisation/](../../../helm/charts/personalisation/) — Helm chart
-- [manifests/merchandise/personalisation/](../../../manifests/merchandise/personalisation/) — Raw K8s manifests
+- [helm/charts/personalisation/](../../../helm/charts/personalisation/) â€” Helm chart
+- [manifests/merchandise/personalisation/](../../../manifests/merchandise/personalisation/) â€” Raw K8s manifests

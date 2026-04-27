@@ -1,9 +1,9 @@
-# MatchDay — Enterprise Sports Management & Fan Engagement Platform
+﻿# MatchDay â€” Enterprise Sports Management & Fan Engagement Platform
 
 Enterprise-grade, cloud-native sports platform built on open source technologies. Covers the full
-sports ecosystem — athlete performance analytics, team & club management, live match operations,
+sports ecosystem â€” athlete performance analytics, team & club management, live match operations,
 ticketing & venue management, fantasy sports, fan engagement, broadcasting rights, sports betting
-integration, and sponsor management — designed for professional sports leagues, clubs, federations,
+integration, and sponsor management â€” designed for professional sports leagues, clubs, federations,
 sports broadcasters, and fantasy sports operators.
 
 ---
@@ -12,7 +12,7 @@ sports broadcasters, and fantasy sports operators.
 
 | Attribute         | Value                                                              |
 |-------------------|--------------------------------------------------------------------|
-| Type              | Sports League Management · Athlete Analytics · Fan Engagement · Fantasy Sports |
+| Type              | Sports League Management Â· Athlete Analytics Â· Fan Engagement Â· Fantasy Sports |
 | Domains           | 17 business domains                                                |
 | Services          | 195+ microservices                                                 |
 | Languages         | Go, Java, Kotlin, Python, Node.js, Rust, TypeScript, Elixir (real-time) |
@@ -53,36 +53,36 @@ sports broadcasters, and fantasy sports operators.
 ## Architecture
 
 ```
-    ┌──────────────────────────────────────────────────────────────────┐
-    │              Cloudflare Edge (WAF + Global CDN)                  │
-    └──────────────────────────┬───────────────────────────────────────┘
-                               │
-    ┌──────────────────────────▼───────────────────────────────────────┐
-    │                       API Gateway                                │
-    │          (OAuth2 · mTLS · Rate Limit · Geo Routing)              │
-    └────┬──────────────┬───────────────┬──────────────┬───────────────┘
-         │              │               │              │
-  ┌──────▼──┐    ┌──────▼───┐   ┌───────▼──┐   ┌──────▼──────────┐
-  │ Fan BFF │    │ Club BFF │   │Media BFF │   │  Athlete App   │
-  │(Next.js)│    │ (React)  │   │(Next.js) │   │   (Flutter)    │
-  └──────┬──┘    └──────┬───┘   └───────┬──┘   └──────┬──────────┘
-         └──────────────┴───────────────┴──────────────┘
-                                │ gRPC (Istio mTLS)
-    ┌───────────────────────────▼────────────────────────────────────┐
-    │                Internal gRPC Mesh (Istio mTLS)                 │
-    │  ┌──────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐  │
-    │  │  Match   │  │  Athlete   │  │  Fantasy   │  │  Venue &   │  │
-    │  │Operations│  │Performance │  │  Sports    │  │  Ticketing │  │
-    │  └──────────┘  └────────────┘  └────────────┘  └────────────┘  │
-    └──────────────────────┬─────────────────────────────────────────┘
-                           │ Kafka (Sports Event Stream)
-          ┌────────────────┼────────────────┐
-          │                │                │
- ┌────────▼──────┐ ┌───────▼────────┐ ┌────▼──────────────────┐
- │  Live Match   │ │  Fantasy       │ │   Sports Analytics    │
- │  Data Feed    │ │  Scoring Engine│ │   ClickHouse + Flink  │
- │  (Elixir WS)  │ │  (sub-1s calc) │ │   Airflow + Superset  │
- └───────────────┘ └────────────────┘ └───────────────────────┘
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚              Cloudflare Edge (WAF + Global CDN)                  â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                               â”‚
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚                       API Gateway                                â”‚
+    â”‚          (OAuth2 Â· mTLS Â· Rate Limit Â· Geo Routing)              â”‚
+    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚              â”‚               â”‚              â”‚
+  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”   â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Fan BFF â”‚    â”‚ Club BFF â”‚   â”‚Media BFF â”‚   â”‚  Athlete App   â”‚
+  â”‚(Next.js)â”‚    â”‚ (React)  â”‚   â”‚(Next.js) â”‚   â”‚   (Flutter)    â”‚
+  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”˜   â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                â”‚ gRPC (Istio mTLS)
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚                Internal gRPC Mesh (Istio mTLS)                 â”‚
+    â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+    â”‚  â”‚  Match   â”‚  â”‚  Athlete   â”‚  â”‚  Fantasy   â”‚  â”‚  Venue &   â”‚  â”‚
+    â”‚  â”‚Operationsâ”‚  â”‚Performance â”‚  â”‚  Sports    â”‚  â”‚  Ticketing â”‚  â”‚
+    â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                           â”‚ Kafka (Sports Event Stream)
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚                â”‚                â”‚
+ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+ â”‚  Live Match   â”‚ â”‚  Fantasy       â”‚ â”‚   Sports Analytics    â”‚
+ â”‚  Data Feed    â”‚ â”‚  Scoring Engineâ”‚ â”‚   ClickHouse + Flink  â”‚
+ â”‚  (Elixir WS)  â”‚ â”‚  (sub-1s calc) â”‚ â”‚   Airflow + Superset  â”‚
+ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -90,61 +90,61 @@ sports broadcasters, and fantasy sports operators.
 ## Tech Stack
 
 ### Sports Data Standards & Protocols
-- **OPTA / Stats Perform**: Industry-standard match data feed (events, tracking, lineups) — XML/JSON ingestion
-- **StatsBomb**: Open data format for event-level football analytics (360° tracking data)
-- **FIFA EPTS**: Electronic Performance and Tracking Systems standard for GPS player tracking wearables
-- **OpenLigaDB**: Open football data API for league fixtures, results, and standings
-- **WADA ADAMS**: Anti-doping administration and management system integration for test results
-- **Hawk-Eye / TRACAB**: Ball and player tracking data integration for video analysis
+- OPTA / Stats Perform: Industry-standard match data feed (events, tracking, lineups) â€” XML/JSON ingestion
+- StatsBomb: Open data format for event-level football analytics (360Â° tracking data)
+- FIFA EPTS: Electronic Performance and Tracking Systems standard for GPS player tracking wearables
+- OpenLigaDB: Open football data API for league fixtures, results, and standings
+- WADA ADAMS: Anti-doping administration and management system integration for test results
+- Hawk-Eye / TRACAB: Ball and player tracking data integration for video analysis
 
 ### Infrastructure
-- **Kubernetes**: EKS + GKE — GPU node pools for computer vision (video analysis, VAR)
-- **Real-time Engine**: Elixir/Phoenix (WebSocket) — live match commentary, fantasy score updates, fan chat (500K concurrent connections)
-- **Graph DB**: Neo4j — player transfer network, team chemistry analysis, scouting network relationships
-- **Time-Series**: TimescaleDB — GPS tracking data (25Hz, 22 players × 90 minutes per match)
-- **Video Processing**: FFmpeg + OpenCV on Kubernetes Jobs — highlight generation, goal detection, VAR clip extraction
-- **CDN**: Cloudflare (global fan content), AWS CloudFront (broadcast stream origin)
+- Kubernetes: EKS + GKE â€” GPU node pools for computer vision (video analysis, VAR)
+- Real-time Engine: Elixir/Phoenix (WebSocket) â€” live match commentary, fantasy score updates, fan chat (500K concurrent connections)
+- Graph DB: Neo4j â€” player transfer network, team chemistry analysis, scouting network relationships
+- Time-Series: TimescaleDB â€” GPS tracking data (25Hz, 22 players Ã— 90 minutes per match)
+- Video Processing: FFmpeg + OpenCV on Kubernetes Jobs â€” highlight generation, goal detection, VAR clip extraction
+- CDN: Cloudflare (global fan content), AWS CloudFront (broadcast stream origin)
 
 ### CI/CD & GitOps
-- **CI**: Jenkins (primary), GitHub Actions, GitLab CI
-- **CD**: ArgoCD (App-of-Apps), Argo Rollouts (canary — match day traffic spikes 100×)
-- **IaC**: Terraform (EKS/GKE + Cloudflare), Ansible, Crossplane
-- **Secrets**: HashiCorp Vault + External Secrets Operator
+- CI: Jenkins (primary), GitHub Actions, GitLab CI
+- CD: ArgoCD (App-of-Apps), Argo Rollouts (canary â€” match day traffic spikes 100Ã—)
+- IaC: Terraform (EKS/GKE + Cloudflare), Ansible, Crossplane
+- Secrets: HashiCorp Vault + External Secrets Operator
 
 ### Observability
-- **Metrics**: Prometheus + Grafana (concurrent fans, live data latency, ticketing throughput)
-- **Logs**: Loki + Fluent Bit
-- **Traces**: Jaeger + OpenTelemetry (trace fantasy score update from match event → calculation → fan notification)
-- **Match Day Dashboard**: Real-time ClickHouse dashboard — concurrent viewers, score updates latency, ticket scans/min
-- **SLOs**: Live data latency < 1s (P99), fantasy score update < 2s, ticket scan < 500ms
+- Metrics: Prometheus + Grafana (concurrent fans, live data latency, ticketing throughput)
+- Logs: Loki + Fluent Bit
+- Traces: Jaeger + OpenTelemetry (trace fantasy score update from match event â†’ calculation â†’ fan notification)
+- Match Day Dashboard: Real-time ClickHouse dashboard â€” concurrent viewers, score updates latency, ticket scans/min
+- SLOs: Live data latency < 1s (P99), fantasy score update < 2s, ticket scan < 500ms
 
 ### Security
-- **Identity**: Keycloak (fan SSO + social login), athlete portal with biometric binding
-- **Gambling Compliance**: KYC/AML for betting integration, responsible gambling controls (deposit limits, self-exclusion)
-- **Youth Protection**: COPPA controls for academy/youth products — parental consent workflows
-- **NFT/Digital Collectibles**: Smart contract security audit (even for off-chain metadata systems)
-- **Network**: Cilium eBPF, Istio mTLS, Cloudflare WAF (DDoS protection during match day spikes)
-- **Scanning**: Trivy, Semgrep, OWASP ZAP, SonarQube, Falco
+- Identity: Keycloak (fan SSO + social login), athlete portal with biometric binding
+- Gambling Compliance: KYC/AML for betting integration, responsible gambling controls (deposit limits, self-exclusion)
+- Youth Protection: COPPA controls for academy/youth products â€” parental consent workflows
+- NFT/Digital Collectibles: Smart contract security audit (even for off-chain metadata systems)
+- Network: Cilium eBPF, Istio mTLS, Cloudflare WAF (DDoS protection during match day spikes)
+- Scanning: Trivy, Semgrep, OWASP ZAP, SonarQube, Falco
 
 ### AI / ML (Sports Intelligence)
-- **Match Outcome Prediction**: Ensemble model (XGBoost + historical results + current form + H2H + xG)
-- **Player Scouting AI**: Multi-dimensional player similarity model (embedding space via Neo4j + collaborative filtering)
-- **Injury Risk Prediction**: ML model on GPS workload data (ACWR — Acute:Chronic Workload Ratio) + biometric signals
-- **Video AI — Auto Highlights**: Action detection CNN (goal, tackle, save, chance) — auto-generates highlight reel post-match
-- **Expected Goals (xG)**: Spatial probability model for shot quality — trained on 500K+ historical shots
-- **Fan Churn Prediction**: Subscription survival analysis — triggers personalised retention campaign
-- **Dynamic Ticket Pricing**: Demand-based pricing model (opponent strength, weather, seat location, days to match)
+- Match Outcome Prediction: Ensemble model (XGBoost + historical results + current form + H2H + xG)
+- Player Scouting AI: Multi-dimensional player similarity model (embedding space via Neo4j + collaborative filtering)
+- Injury Risk Prediction: ML model on GPS workload data (ACWR â€” Acute:Chronic Workload Ratio) + biometric signals
+- Video AI â€” Auto Highlights: Action detection CNN (goal, tackle, save, chance) â€” auto-generates highlight reel post-match
+- Expected Goals (xG): Spatial probability model for shot quality â€” trained on 500K+ historical shots
+- Fan Churn Prediction: Subscription survival analysis â€” triggers personalised retention campaign
+- Dynamic Ticket Pricing: Demand-based pricing model (opponent strength, weather, seat location, days to match)
 
 ---
 
 ## Key Design Decisions
 
-1. **Elixir for real-time fan layer**: Phoenix LiveView/WebSocket handles 500K+ concurrent fan connections during match — Go/Java cannot match Elixir's concurrency model for this use case
-2. **Sub-1 second live data**: OPTA feed → Kafka → Flink processing → NATS → WebSocket push — end-to-end < 1s glass-to-glass for live match events
-3. **Fantasy scoring as a stream**: Every match event (goal, assist, yellow card, clean sheet) triggers a Flink job that recalculates all affected fantasy team scores in real-time — not batch
-4. **GPS tracking at 25Hz**: TimescaleDB with hypertable partitioning by match_id — 22 players × 25 readings/sec × 90 min = 2.97M rows per match, sub-10ms query
-5. **Match day auto-scaling**: KEDA scales fan-facing services from 2 to 50 pods based on Kafka lag + concurrent WebSocket connections — triggered 90 minutes before kick-off
-6. **NFT as off-chain metadata**: Digital collectibles managed as database records with cryptographic proof — no blockchain gas fees; on-chain anchor only for provenance verification
+1. Elixir for real-time fan layer: Phoenix LiveView/WebSocket handles 500K+ concurrent fan connections during match â€” Go/Java cannot match Elixir's concurrency model for this use case
+2. Sub-1 second live data: OPTA feed â†’ Kafka â†’ Flink processing â†’ NATS â†’ WebSocket push â€” end-to-end < 1s glass-to-glass for live match events
+3. Fantasy scoring as a stream: Every match event (goal, assist, yellow card, clean sheet) triggers a Flink job that recalculates all affected fantasy team scores in real-time â€” not batch
+4. GPS tracking at 25Hz: TimescaleDB with hypertable partitioning by match_id â€” 22 players Ã— 25 readings/sec Ã— 90 min = 2.97M rows per match, sub-10ms query
+5. Match day auto-scaling: KEDA scales fan-facing services from 2 to 50 pods based on Kafka lag + concurrent WebSocket connections â€” triggered 90 minutes before kick-off
+6. NFT as off-chain metadata: Digital collectibles managed as database records with cryptographic proof â€” no blockchain gas fees; on-chain anchor only for provenance verification
 
 ---
 

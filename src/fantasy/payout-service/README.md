@@ -1,8 +1,8 @@
-# payout-service
+﻿# payout-service
 
-Service in the **fantasy** domain of MatchDay.
+Service in the fantasy domain of MatchDay.
 
-**Language:** Go · **Port:** 50223
+Language: Go Â· Port: 50223
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/payout-service/](../../../helm/charts/payout-service/) — Helm chart
-- [manifests/fantasy/payout-service/](../../../manifests/fantasy/payout-service/) — Raw K8s manifests
+- [helm/charts/payout-service/](../../../helm/charts/payout-service/) â€” Helm chart
+- [manifests/fantasy/payout-service/](../../../manifests/fantasy/payout-service/) â€” Raw K8s manifests

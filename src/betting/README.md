@@ -1,9 +1,9 @@
-# betting — MatchDay
+﻿# betting â€” MatchDay
 
 Sports betting integration. Regulated by jurisdiction (UKGC, MGA, Nevada).
 
-> **Responsible-gambling rule** — `responsible-gambling-service` enforces deposit limits + self-exclusion
-> on every bet. **Never bypassed.** Enforced by `gambling-responsible-limits.rego`.
+> Responsible-gambling rule â€” `responsible-gambling-service` enforces deposit limits + self-exclusion
+> on every bet. Never bypassed. Enforced by `gambling-responsible-limits.rego`.
 
 | Service | Language | Port | Description |
 |---|---|---|---|

@@ -1,8 +1,8 @@
-# collectibles
+﻿# collectibles
 
-Service in the **fan-engagement** domain of MatchDay.
+Service in the fan-engagement domain of MatchDay.
 
-**Language:** Go · **Port:** 50202
+Language: Go Â· Port: 50202
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/collectibles/](../../../helm/charts/collectibles/) — Helm chart
-- [manifests/fan-engagement/collectibles/](../../../manifests/fan-engagement/collectibles/) — Raw K8s manifests
+- [helm/charts/collectibles/](../../../helm/charts/collectibles/) â€” Helm chart
+- [manifests/fan-engagement/collectibles/](../../../manifests/fan-engagement/collectibles/) â€” Raw K8s manifests

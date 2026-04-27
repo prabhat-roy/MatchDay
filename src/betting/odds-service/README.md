@@ -1,8 +1,8 @@
-# odds-service
+﻿# odds-service
 
-Service in the **betting** domain of MatchDay.
+Service in the betting domain of MatchDay.
 
-**Language:** Go · **Port:** 50240
+Language: Go Â· Port: 50240
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/odds-service/](../../../helm/charts/odds-service/) — Helm chart
-- [manifests/betting/odds-service/](../../../manifests/betting/odds-service/) — Raw K8s manifests
+- [helm/charts/odds-service/](../../../helm/charts/odds-service/) â€” Helm chart
+- [manifests/betting/odds-service/](../../../manifests/betting/odds-service/) â€” Raw K8s manifests

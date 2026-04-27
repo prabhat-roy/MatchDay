@@ -1,8 +1,8 @@
-# draft-service
+﻿# draft-service
 
-Service in the **fantasy** domain of MatchDay.
+Service in the fantasy domain of MatchDay.
 
-**Language:** Go · **Port:** 50220
+Language: Go Â· Port: 50220
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/draft-service/](../../../helm/charts/draft-service/) — Helm chart
-- [manifests/fantasy/draft-service/](../../../manifests/fantasy/draft-service/) — Raw K8s manifests
+- [helm/charts/draft-service/](../../../helm/charts/draft-service/) â€” Helm chart
+- [manifests/fantasy/draft-service/](../../../manifests/fantasy/draft-service/) â€” Raw K8s manifests

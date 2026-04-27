@@ -1,4 +1,4 @@
-# CI — MatchDay
+﻿# CI â€” MatchDay
 
 CI pipelines across Jenkins (primary), GitHub Actions, GitLab CI, Tekton.
 
@@ -13,4 +13,4 @@ CI pipelines across Jenkins (primary), GitHub Actions, GitLab CI, Tekton.
 | `gitlab-ci/.gitlab-ci.yml`      | Kaniko build + Trivy + Syft + Cosign |
 | `tekton/pipeline.yaml`          | helm-upgrade-from-source pipeline |
 
-Match-day deploys: betting + ticketing use **blue/green**, all others **canary**.
+Match-day deploys: betting + ticketing use blue/green, all others canary.

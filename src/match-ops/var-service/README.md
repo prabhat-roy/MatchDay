@@ -1,8 +1,8 @@
-# var-service
+﻿# var-service
 
-Service in the **match-ops** domain of MatchDay.
+Service in the match-ops domain of MatchDay.
 
-**Language:** Go · **Port:** 50142
+Language: Go Â· Port: 50142
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/var-service/](../../../helm/charts/var-service/) — Helm chart
-- [manifests/match-ops/var-service/](../../../manifests/match-ops/var-service/) — Raw K8s manifests
+- [helm/charts/var-service/](../../../helm/charts/var-service/) â€” Helm chart
+- [manifests/match-ops/var-service/](../../../manifests/match-ops/var-service/) â€” Raw K8s manifests

@@ -1,5 +1,5 @@
-# club-sso
+﻿# club-sso
 
 Club staff SSO
 
-**Domain:** `identity` · **Language:** rust · **Port:** 50023
+Domain: `identity` Â· Language: rust Â· Port: 50023

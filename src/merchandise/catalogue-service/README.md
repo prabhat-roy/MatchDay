@@ -1,8 +1,8 @@
-# catalogue-service
+﻿# catalogue-service
 
-Service in the **merchandise** domain of MatchDay.
+Service in the merchandise domain of MatchDay.
 
-**Language:** Go · **Port:** 50280
+Language: Go Â· Port: 50280
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/catalogue-service/](../../../helm/charts/catalogue-service/) — Helm chart
-- [manifests/merchandise/catalogue-service/](../../../manifests/merchandise/catalogue-service/) — Raw K8s manifests
+- [helm/charts/catalogue-service/](../../../helm/charts/catalogue-service/) â€” Helm chart
+- [manifests/merchandise/catalogue-service/](../../../manifests/merchandise/catalogue-service/) â€” Raw K8s manifests

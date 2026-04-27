@@ -1,8 +1,8 @@
-# seat-map-service
+﻿# seat-map-service
 
-Service in the **venue** domain of MatchDay.
+Service in the venue domain of MatchDay.
 
-**Language:** Go · **Port:** 50161
+Language: Go Â· Port: 50161
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/seat-map-service/](../../../helm/charts/seat-map-service/) — Helm chart
-- [manifests/venue/seat-map-service/](../../../manifests/venue/seat-map-service/) — Raw K8s manifests
+- [helm/charts/seat-map-service/](../../../helm/charts/seat-map-service/) â€” Helm chart
+- [manifests/venue/seat-map-service/](../../../manifests/venue/seat-map-service/) â€” Raw K8s manifests

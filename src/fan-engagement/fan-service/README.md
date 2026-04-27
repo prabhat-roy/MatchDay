@@ -1,5 +1,5 @@
-# fan-service
+﻿# fan-service
 
 Fan engagement orchestrator
 
-**Domain:** `fan-engagement` · **Language:** go · **Port:** 50200
+Domain: `fan-engagement` Â· Language: go Â· Port: 50200

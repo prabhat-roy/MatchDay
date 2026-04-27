@@ -1,8 +1,8 @@
-# risk-management
+﻿# risk-management
 
-Service in the **betting** domain of MatchDay.
+Service in the betting domain of MatchDay.
 
-**Language:** Go · **Port:** 50242
+Language: Go Â· Port: 50242
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/risk-management/](../../../helm/charts/risk-management/) — Helm chart
-- [manifests/betting/risk-management/](../../../manifests/betting/risk-management/) — Raw K8s manifests
+- [helm/charts/risk-management/](../../../helm/charts/risk-management/) â€” Helm chart
+- [manifests/betting/risk-management/](../../../manifests/betting/risk-management/) â€” Raw K8s manifests

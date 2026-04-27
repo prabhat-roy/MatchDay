@@ -1,8 +1,8 @@
-# medicine — MatchDay
+﻿# medicine â€” MatchDay
 
 Sports medicine: injury, rehab, fitness, anti-doping (WADA-siloed cluster), HL7 medical record.
 
-> **Anti-doping data is siloed** — separate K8s namespace, dedicated PostgreSQL cluster,
+> Anti-doping data is siloed â€” separate K8s namespace, dedicated PostgreSQL cluster,
 > separate KMS keys, append-only audit trail. Every access logged via `anti-doping-audit.rego`.
 
 | Service | Language | Port | Description |

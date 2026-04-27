@@ -1,8 +1,8 @@
-# activation-service
+﻿# activation-service
 
-Service in the **sponsorship** domain of MatchDay.
+Service in the sponsorship domain of MatchDay.
 
-**Language:** Go · **Port:** 50260
+Language: Go Â· Port: 50260
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/activation-service/](../../../helm/charts/activation-service/) — Helm chart
-- [manifests/sponsorship/activation-service/](../../../manifests/sponsorship/activation-service/) — Raw K8s manifests
+- [helm/charts/activation-service/](../../../helm/charts/activation-service/) â€” Helm chart
+- [manifests/sponsorship/activation-service/](../../../manifests/sponsorship/activation-service/) â€” Raw K8s manifests

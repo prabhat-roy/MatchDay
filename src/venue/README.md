@@ -1,6 +1,6 @@
-# venue — MatchDay
+﻿# venue â€” MatchDay
 
-Venue & ticketing. Ticketing uses **blue-green during live events** (CLAUDE.md rule).
+Venue & ticketing. Ticketing uses blue-green during live events (CLAUDE.md rule).
 
 | Service | Language | Port | Description |
 |---|---|---|---|

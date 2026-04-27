@@ -1,8 +1,8 @@
-# referee-service
+﻿# referee-service
 
-Service in the **match-ops** domain of MatchDay.
+Service in the match-ops domain of MatchDay.
 
-**Language:** Go · **Port:** 50141
+Language: Go Â· Port: 50141
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/referee-service/](../../../helm/charts/referee-service/) — Helm chart
-- [manifests/match-ops/referee-service/](../../../manifests/match-ops/referee-service/) — Raw K8s manifests
+- [helm/charts/referee-service/](../../../helm/charts/referee-service/) â€” Helm chart
+- [manifests/match-ops/referee-service/](../../../manifests/match-ops/referee-service/) â€” Raw K8s manifests

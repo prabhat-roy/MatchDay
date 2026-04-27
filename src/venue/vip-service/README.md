@@ -1,8 +1,8 @@
-# vip-service
+﻿# vip-service
 
-Service in the **venue** domain of MatchDay.
+Service in the venue domain of MatchDay.
 
-**Language:** Go · **Port:** 50163
+Language: Go Â· Port: 50163
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/vip-service/](../../../helm/charts/vip-service/) — Helm chart
-- [manifests/venue/vip-service/](../../../manifests/venue/vip-service/) — Raw K8s manifests
+- [helm/charts/vip-service/](../../../helm/charts/vip-service/) â€” Helm chart
+- [manifests/venue/vip-service/](../../../manifests/venue/vip-service/) â€” Raw K8s manifests

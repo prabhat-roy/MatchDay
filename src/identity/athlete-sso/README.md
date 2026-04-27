@@ -1,5 +1,5 @@
-# athlete-sso
+﻿# athlete-sso
 
 Athlete portal SSO with biometric binding
 
-**Domain:** `identity` · **Language:** rust · **Port:** 50022
+Domain: `identity` Â· Language: rust Â· Port: 50022

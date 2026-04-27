@@ -1,5 +1,5 @@
-# media-bff
+﻿# media-bff
 
 BFF for media/broadcast portal (Next.js)
 
-**Domain:** `platform` · **Language:** go · **Port:** 50003
+Domain: `platform` Â· Language: go Â· Port: 50003

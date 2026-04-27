@@ -1,5 +1,5 @@
-# clip-publisher
+﻿# clip-publisher
 
 Live clip publishing to CDN
 
-**Domain:** `broadcast` · **Language:** rust · **Port:** 50183
+Domain: `broadcast` Â· Language: rust Â· Port: 50183

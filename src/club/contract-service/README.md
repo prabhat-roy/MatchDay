@@ -1,8 +1,8 @@
-# contract-service
+﻿# contract-service
 
-Service in the **club** domain of MatchDay.
+Service in the club domain of MatchDay.
 
-**Language:** Go · **Port:** 50062
+Language: Go Â· Port: 50062
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/contract-service/](../../../helm/charts/contract-service/) — Helm chart
-- [manifests/club/contract-service/](../../../manifests/club/contract-service/) — Raw K8s manifests
+- [helm/charts/contract-service/](../../../helm/charts/contract-service/) â€” Helm chart
+- [manifests/club/contract-service/](../../../manifests/club/contract-service/) â€” Raw K8s manifests

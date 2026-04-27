@@ -1,5 +1,5 @@
-# club-bff
+﻿# club-bff
 
 BFF for club dashboard (React)
 
-**Domain:** `platform` · **Language:** go · **Port:** 50002
+Domain: `platform` Â· Language: go Â· Port: 50002

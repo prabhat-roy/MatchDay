@@ -1,8 +1,8 @@
-# season-service
+﻿# season-service
 
-Service in the **league** domain of MatchDay.
+Service in the league domain of MatchDay.
 
-**Language:** Go · **Port:** 50040
+Language: Go Â· Port: 50040
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/season-service/](../../../helm/charts/season-service/) — Helm chart
-- [manifests/league/season-service/](../../../manifests/league/season-service/) — Raw K8s manifests
+- [helm/charts/season-service/](../../../helm/charts/season-service/) â€” Helm chart
+- [manifests/league/season-service/](../../../manifests/league/season-service/) â€” Raw K8s manifests

@@ -1,4 +1,4 @@
-# AI_PLAN.md — MatchDay (Sports & Live-Event Platform)
+﻿# AI_PLAN.md â€” MatchDay (Sports & Live-Event Platform)
 
 > Hierarchical AI/ML strategy. Reuses the Paperclip / OpenClaw / NemoClaw
 > agent platform first defined in [ShopOS/AI.md](../ShopOS/AI.md). This file
@@ -11,10 +11,10 @@
 Live sport is a streaming-data, fan-engagement, and ops-optimisation
 business at the same time. AI must be:
 
-- **Sub-second** for in-play stat overlays and bet-pricing signals.
-- **Multimodal** (broadcast video, tracking data, fan social media,
+- Sub-second for in-play stat overlays and bet-pricing signals.
+- Multimodal (broadcast video, tracking data, fan social media,
   ticketing).
-- **Personalised** at the individual fan level for retention and
+- Personalised at the individual fan level for retention and
   monetisation, while staying compliant with consumer-protection laws on
   betting.
 
@@ -41,14 +41,14 @@ business at the same time. AI must be:
 
 ## 3. Hierarchical Agent Architecture
 
-Reuses **OpenClaw** / **Paperclip** / **NemoClaw** from `ShopOS/AI.md`.
+Reuses OpenClaw / Paperclip / NemoClaw from `ShopOS/AI.md`.
 
-### Tier 0 — Master Architect Agent
+### Tier 0 â€” Master Architect Agent
 
-`match-architect` — researches AI tooling, proposes services, on-boards
+`match-architect` â€” researches AI tooling, proposes services, on-boards
 Tier-1 leads, weekly written report. Read-only on prod.
 
-### Tier 1 — Division Leads (5)
+### Tier 1 â€” Division Leads (5)
 
 | Agent | Scope |
 |-------|-------|
@@ -58,30 +58,30 @@ Tier-1 leads, weekly written report. Read-only on prod.
 | `match-dataml-lead`     | Feature store, training, drift |
 | `match-platform-lead`   | Cross-cutting (idempotency, saga, outbox), edge runtime |
 
-### Tier 2 — Specialist Agents
+### Tier 2 â€” Specialist Agents
 
-**By language**: Go, Java, Kotlin, Python, Node, Rust, TypeScript, Swift,
+By language: Go, Java, Kotlin, Python, Node, Rust, TypeScript, Swift,
 Dart.
 
-**By tool**: PostgreSQL, MongoDB, Redis, ScyllaDB, ClickHouse, Cassandra,
+By tool: PostgreSQL, MongoDB, Redis, ScyllaDB, ClickHouse, Cassandra,
 Kafka, NATS, RabbitMQ, MQTT, Vault, Keycloak, OPA, Kyverno, Falco, Cilium,
 Istio, ArgoCD, Argo Workflows, Prometheus, Grafana, Loki, Jaeger,
 OpenTelemetry, MinIO, Trivy, Cosign, Pulsar, Druid, Camunda, OpenFGA,
-Wazuh, **OvenMediaEngine** (live streaming), **SRT relay**, FFmpeg
+Wazuh, OvenMediaEngine (live streaming), SRT relay, FFmpeg
 pipelines, MediaMTX, NVIDIA Maxine SDK (self-hosted alternatives).
 
-**By service** — one agent per microservice (~175). Owns README,
+By service â€” one agent per microservice (~175). Owns README,
 OpenAPI, tests, CHANGELOG, deps, /healthz.
 
-### Tier 3 — Ephemeral Workers
+### Tier 3 â€” Ephemeral Workers
 
 Spawned for retraining win-probability after season schema changes,
 generating highlight reels post-match, fan-content moderation backfills.
 
 ### Lifecycle
 
-Research → Document → Implement → Test → Review → Deploy → Monitor →
-Respond → Upgrade → Report. Live-event freeze window: NemoClaw blocks
+Research â†’ Document â†’ Implement â†’ Test â†’ Review â†’ Deploy â†’ Monitor â†’
+Respond â†’ Upgrade â†’ Report. Live-event freeze window: NemoClaw blocks
 agent code-changes during scheduled live windows.
 
 ---
@@ -90,30 +90,30 @@ agent code-changes during scheduled live windows.
 
 ```
 ai-platform/
-├── cluster: match-ai-{aws,gcp,azure}     ← cloud GPU pool
-├── cluster: match-ai-edge                ← stadium k3s + Jetson Orin
-├── namespace: match-ai-control            ← Paperclip
-├── namespace: match-ai-agents             ← OpenClaw runtime
-├── namespace: match-ai-sandbox            ← NemoClaw
-├── namespace: match-ai-models             ← vLLM, Ollama, LiteLLM, Triton
-├── namespace: match-ai-data               ← Qdrant, Weaviate, MinIO, MLflow
-├── namespace: match-ai-obs                ← Langfuse, Phoenix
-└── namespace: match-ai-pipelines          ← Argo Workflows
+â”œâ”€â”€ cluster: match-ai-{aws,gcp,azure}     â† cloud GPU pool
+â”œâ”€â”€ cluster: match-ai-edge                â† stadium k3s + Jetson Orin
+â”œâ”€â”€ namespace: match-ai-control            â† Paperclip
+â”œâ”€â”€ namespace: match-ai-agents             â† OpenClaw runtime
+â”œâ”€â”€ namespace: match-ai-sandbox            â† NemoClaw
+â”œâ”€â”€ namespace: match-ai-models             â† vLLM, Ollama, LiteLLM, Triton
+â”œâ”€â”€ namespace: match-ai-data               â† Qdrant, Weaviate, MinIO, MLflow
+â”œâ”€â”€ namespace: match-ai-obs                â† Langfuse, Phoenix
+â””â”€â”€ namespace: match-ai-pipelines          â† Argo Workflows
 ```
 
 ### Hardware
 
-- **Cloud**: A100 for video + tracking model training; A10G/L4 for LLM.
-- **Stadium edge**: Jetson Orin running TensorRT for live tracking + cam.
+- Cloud: A100 for video + tracking model training; A10G/L4 for LLM.
+- Stadium edge: Jetson Orin running TensorRT for live tracking + cam.
 
 ### Software stack
 
-Same as the FreightForce/StayNest baseline — vLLM, LiteLLM, Paperclip,
+Same as the FreightForce/StayNest baseline â€” vLLM, LiteLLM, Paperclip,
 OpenClaw, NemoClaw, Qdrant, Weaviate, MLflow, Feast, Argo Workflows,
 Evidently, Langfuse, Phoenix.
 
-Plus: **OvenMediaEngine + FFmpeg + MediaMTX** for live broadcast pipeline,
-self-hosted **Whisper + Coqui TTS** for multilingual voice.
+Plus: OvenMediaEngine + FFmpeg + MediaMTX for live broadcast pipeline,
+self-hosted Whisper + Coqui TTS for multilingual voice.
 
 ### Data isolation
 
@@ -144,7 +144,7 @@ self-hosted **Whisper + Coqui TTS** for multilingual voice.
 | 2 | Paperclip + NemoClaw; Tier-0 architect live |
 | 3 | Tier-1 leads; win-prob v0 shadow |
 | 4 | Per-language / per-tool Tier-2 agents |
-| 5 | Per-service Tier-2 agents (analytics → media → fan first) |
+| 5 | Per-service Tier-2 agents (analytics â†’ media â†’ fan first) |
 | 6 | Highlight auto-gen pilot; chatbot prod |
 | 7 | Player tracking v1; ticket-pricing optimisation |
 | 8 | Multi-cloud failover drill, stadium edge rollout |
@@ -153,9 +153,9 @@ self-hosted **Whisper + Coqui TTS** for multilingual voice.
 
 ## 7. Cost Envelope (target)
 
-- **Cloud infra**: $4,800 – $7,200 / month per primary cloud
-- **Stadium edge**: $2,500 one-time + $60/month ops
-- **No** subscription LLM spend
+- Cloud infra: $4,800 â€“ $7,200 / month per primary cloud
+- Stadium edge: $2,500 one-time + $60/month ops
+- No subscription LLM spend
 
 ---
 

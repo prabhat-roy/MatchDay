@@ -1,8 +1,8 @@
-# anti-doping
+﻿# anti-doping
 
-Service in the **medicine** domain of MatchDay.
+Service in the medicine domain of MatchDay.
 
-**Language:** Go · **Port:** 50123
+Language: Go Â· Port: 50123
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/anti-doping/](../../../helm/charts/anti-doping/) — Helm chart
-- [manifests/medicine/anti-doping/](../../../manifests/medicine/anti-doping/) — Raw K8s manifests
+- [helm/charts/anti-doping/](../../../helm/charts/anti-doping/) â€” Helm chart
+- [manifests/medicine/anti-doping/](../../../manifests/medicine/anti-doping/) â€” Raw K8s manifests

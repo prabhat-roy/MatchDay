@@ -1,8 +1,8 @@
-# development-pathway
+﻿# development-pathway
 
-Service in the **academy** domain of MatchDay.
+Service in the academy domain of MatchDay.
 
-**Language:** Go · **Port:** 50302
+Language: Go Â· Port: 50302
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/development-pathway/](../../../helm/charts/development-pathway/) — Helm chart
-- [manifests/academy/development-pathway/](../../../manifests/academy/development-pathway/) — Raw K8s manifests
+- [helm/charts/development-pathway/](../../../helm/charts/development-pathway/) â€” Helm chart
+- [manifests/academy/development-pathway/](../../../manifests/academy/development-pathway/) â€” Raw K8s manifests

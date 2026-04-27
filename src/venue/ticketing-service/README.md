@@ -1,8 +1,8 @@
-# ticketing-service
+﻿# ticketing-service
 
-Service in the **venue** domain of MatchDay.
+Service in the venue domain of MatchDay.
 
-**Language:** Go · **Port:** 50160
+Language: Go Â· Port: 50160
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/ticketing-service/](../../../helm/charts/ticketing-service/) — Helm chart
-- [manifests/venue/ticketing-service/](../../../manifests/venue/ticketing-service/) — Raw K8s manifests
+- [helm/charts/ticketing-service/](../../../helm/charts/ticketing-service/) â€” Helm chart
+- [manifests/venue/ticketing-service/](../../../manifests/venue/ticketing-service/) â€” Raw K8s manifests

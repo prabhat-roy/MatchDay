@@ -1,8 +1,8 @@
-# responsible-gambling
+﻿# responsible-gambling
 
-Service in the **betting** domain of MatchDay.
+Service in the betting domain of MatchDay.
 
-**Language:** Go · **Port:** 50243
+Language: Go Â· Port: 50243
 
 ## Run locally
 
@@ -12,9 +12,9 @@ make run
 
 ## Endpoints
 
-- `GET /healthz` — health check, returns `{ "status": "ok" }`
+- `GET /healthz` â€” health check, returns `{ "status": "ok" }`
 
 ## See also
 
-- [helm/charts/responsible-gambling/](../../../helm/charts/responsible-gambling/) — Helm chart
-- [manifests/betting/responsible-gambling/](../../../manifests/betting/responsible-gambling/) — Raw K8s manifests
+- [helm/charts/responsible-gambling/](../../../helm/charts/responsible-gambling/) â€” Helm chart
+- [manifests/betting/responsible-gambling/](../../../manifests/betting/responsible-gambling/) â€” Raw K8s manifests
