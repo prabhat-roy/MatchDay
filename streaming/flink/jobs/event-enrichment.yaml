@@ -1,0 +1,10 @@
+﻿apiVersion: flink.apache.org/v1beta1
+kind: FlinkSessionJob
+metadata: { name: matchday-event-enrichment, namespace: matchday }
+spec:
+  deploymentName: matchday-flink
+  job:
+    jarURI: s3://matchday-flink-jobs/event-enrichment.jar
+    parallelism: 4
+    upgradeMode: savepoint
+    args: ["--source-topic", "matchday.cdc.public.events", "--sink-topic", "matchday.events.enriched"]

@@ -1,0 +1,19 @@
+﻿matchday:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres.matchday.svc
+      user: dbt
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      port: 5432
+      dbname: matchday_warehouse
+      schema: public
+      threads: 8
+    prod:
+      type: trino
+      host: trino.matchday.svc
+      port: 8080
+      catalog: iceberg
+      schema: matchday_mart
+      threads: 16

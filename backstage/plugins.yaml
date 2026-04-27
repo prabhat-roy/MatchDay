@@ -1,0 +1,6 @@
+﻿plugins:
+  - { id: tech-radar, config: { url: https://github.com/prabhat-roy/MatchDay/raw/main/backstage/tech-radar.json } }
+  - { id: lighthouse, config: { baseUrl: https://lhci.matchday.internal } }
+  - { id: opencost,   config: { baseUrl: https://opencost.matchday.internal } }
+  - { id: argocd,     config: { url: https://argocd.matchday.internal, token: "${ARGOCD_TOKEN}" } }
+  - { id: kubernetes, config: { clusters: [{ name: matchday-aws, url: https://eks.matchday.aws.internal }, { name: matchday-gcp, url: https://gke.matchday.gcp.internal }, { name: matchday-azure, url: https://aks.matchday.azure.internal }] } }

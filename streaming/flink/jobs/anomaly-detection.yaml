@@ -1,0 +1,10 @@
+﻿apiVersion: flink.apache.org/v1beta1
+kind: FlinkSessionJob
+metadata: { name: matchday-anomaly-detection, namespace: matchday }
+spec:
+  deploymentName: matchday-flink
+  job:
+    jarURI: s3://matchday-flink-jobs/anomaly-detection.jar
+    parallelism: 6
+    upgradeMode: savepoint
+    args: ["--source-topic", "matchday.metrics.raw", "--sink-topic", "matchday.alerts.anomaly"]
